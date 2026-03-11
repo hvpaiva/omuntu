@@ -22,10 +22,14 @@ sudo apt-get install -y \
   gtk-doc-tools valac
 
 # Ubuntu 24.04 ships Rust 1.75 but SwayOSD needs edition2024 (Rust 1.85+)
-if ! command -v rustc &>/dev/null || [[ $(rustc --version | grep -oP '\d+\.\d+' | head -1) < "1.85" ]]; then
+# Ensure rustup's Rust is on PATH (run_logged subshell doesn't inherit it)
+if [[ -f "$HOME/.cargo/env" ]]; then
+  source "$HOME/.cargo/env"
+elif ! command -v rustc &>/dev/null; then
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path
   source "$HOME/.cargo/env"
 fi
+export PATH="$HOME/.cargo/bin:$PATH"
 
 BUILD_DIR=$(mktemp -d)
 cd "$BUILD_DIR"

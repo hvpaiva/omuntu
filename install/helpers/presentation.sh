@@ -3,7 +3,7 @@ if ! command -v gum &>/dev/null; then
   # Add Charm repo if not already present (needed before apt-setup.sh runs)
   if [ ! -f /etc/apt/sources.list.d/charm.list ]; then
     sudo mkdir -p /etc/apt/keyrings
-    curl -fsSL https://repo.charm.sh/apt/gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/charm.gpg
+    curl -fsSL https://repo.charm.sh/apt/gpg.key | sudo gpg --batch --yes --dearmor -o /etc/apt/keyrings/charm.gpg
     echo "deb [signed-by=/etc/apt/keyrings/charm.gpg] https://repo.charm.sh/apt/ * *" | sudo tee /etc/apt/sources.list.d/charm.list
     sudo apt-get update
   fi

@@ -7,7 +7,7 @@ mkdir -p ~/.config/omuntu/themes
 
 # Set initial theme
 omarchy-theme-set "Tokyo Night"
-rm -rf ~/.config/chromium/SingletonLock # otherwise archiso will own the chromium singleton
+rm -rf ~/.config/chromium/SingletonLock # remove stale lock if present
 
 # Set specific app links for current theme
 mkdir -p ~/.config/btop/themes

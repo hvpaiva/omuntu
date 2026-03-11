@@ -6,6 +6,9 @@ omarchy-pkg-add "${apt_packages[@]}"
 mapfile -t ppa_packages < <(grep -v '^#' "$OMUNTU_INSTALL/packages/ppa.packages" | grep -v '^$')
 omarchy-pkg-add "${ppa_packages[@]}"
 
+# Setup Flathub remote (flatpak itself is in apt.packages)
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo || true
+
 # Install Flatpak packages
 mapfile -t flatpak_packages < <(grep -v '^#' "$OMUNTU_INSTALL/packages/flatpak.packages" | grep -v '^$')
 for pkg in "${flatpak_packages[@]}"; do

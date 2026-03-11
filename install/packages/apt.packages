@@ -1,3 +1,10 @@
+# Build tools (needed for source builds: SwayOSD, Walker)
+cmake
+golang
+meson
+ninja-build
+pkg-config
+
 # Core system
 alsa-utils
 avahi-daemon

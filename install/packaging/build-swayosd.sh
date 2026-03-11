@@ -13,10 +13,10 @@ echo "Building SwayOSD from source..."
 BUILD_DIR=$(mktemp -d)
 cd "$BUILD_DIR"
 
-# Build dependencies: SASS compiler, GTK3, layer-shell, audio, input
+# Build dependencies: SASS compiler, GTK4, layer-shell, audio, input
 sudo apt-get install -y \
   sassc \
-  libgtk-3-dev libgtk-layer-shell-dev libpulse-dev \
+  libgtk-4-dev libgtk4-layer-shell-dev libpulse-dev \
   libevdev-dev libudev-dev libinput-dev \
   libglib2.0-dev libdbus-1-dev
 

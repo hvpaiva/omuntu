@@ -1,4 +1,5 @@
-# Setup Ubuntu repositories and install build tools
+# Setup Ubuntu repositories (PPAs and third-party repos)
+# Packages are installed later in packaging/base.sh via apt.packages
 
 if [[ -n ${OMUNTU_ONLINE_INSTALL:-} ]]; then
   # Add Hyprland PPA
@@ -14,13 +15,6 @@ if [[ -n ${OMUNTU_ONLINE_INSTALL:-} ]]; then
     echo "deb [signed-by=/etc/apt/keyrings/charm.gpg] https://repo.charm.sh/apt/ * *" | sudo tee /etc/apt/sources.list.d/charm.list
   fi
 
-  # Update package lists
+  # Update package lists after adding all repos
   sudo apt-get update
-
-  # Install build essentials
-  sudo apt-get install -y build-essential cmake meson ninja-build curl wget pkg-config
-
-  # Install Flatpak support
-  sudo apt-get install -y flatpak
-  flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo || true
 fi

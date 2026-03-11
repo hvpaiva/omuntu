@@ -96,7 +96,8 @@ run_logged() {
   echo "[$(date '+%Y-%m-%d %H:%M:%S')] Starting: $script" >>"$OMUNTU_INSTALL_LOG_FILE"
 
   # Use bash -c to create a clean subshell
-  bash -c "source '$script'" </dev/null >>"$OMUNTU_INSTALL_LOG_FILE" 2>&1
+  # DEBIAN_FRONTEND=noninteractive prevents apt/dpkg interactive prompts
+  DEBIAN_FRONTEND=noninteractive bash -c "source '$script'" </dev/null >>"$OMUNTU_INSTALL_LOG_FILE" 2>&1
 
   local exit_code=$?
 

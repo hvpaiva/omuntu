@@ -29,6 +29,6 @@ install_nerd_font() {
 }
 
 install_nerd_font "JetBrainsMono"
-install_nerd_font "iAWriter"
+install_nerd_font "iA-Writer"
 
 fc-cache -f

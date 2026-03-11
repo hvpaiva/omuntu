@@ -1,18 +1,5 @@
-# Directs user to Omuntu Discord
-QR_CODE='
-█▀▀▀▀▀█ ▄ ▄ ▀▄▄▄█ █▀▀▀▀▀█
-█ ███ █ ▄▄▄▄▀▄▀▄▀ █ ███ █
-█ ▀▀▀ █ ▄█  ▄█▄▄▀ █ ▀▀▀ █
-▀▀▀▀▀▀▀ ▀▄█ █ █ █ ▀▀▀▀▀▀▀
-▀▀█▀▀▄▀▀▀▀▄█▀▀█  ▀ █ ▀ █
-█▄█ ▄▄▀▄▄ ▀ ▄ ▀█▄▄▄▄ ▀ ▀█
-▄ ▄▀█ ▀▄▀▀▀▄ ▄█▀▄█▀▄▀▄▀█▀
-█ ▄▄█▄▀▄█ ▄▄▄  ▀ ▄▀██▀ ▀█
-▀ ▀   ▀ █ ▀▄  ▀▀█▀▀▀█▄▀
-█▀▀▀▀▀█ ▀█  ▄▀▀ █ ▀ █▄▀██
-█ ███ █ █▀▄▄▀ █▀███▀█▄██▄
-█ ▀▀▀ █ ██  ▀ █▄█ ▄▄▄█▀ █
-▀▀▀▀▀▀▀ ▀ ▀ ▀▀▀  ▀ ▀▀▀▀▀▀'
+# Support URL for error reporting
+OMUNTU_SUPPORT_URL="https://github.com/hvpaiva/omuntu/issues"
 
 # Track if we're already handling an error to prevent double-trapping
 ERROR_HANDLING=false
@@ -96,9 +83,8 @@ catch_errors() {
   gum style "This command halted with exit code $exit_code:"
   show_failed_script_or_command
 
-  gum style "$QR_CODE"
   echo
-  gum style "Get help from the community via QR code or at https://discord.gg/tXFUdasqhY"
+  gum style "Report issues or get help at: $OMUNTU_SUPPORT_URL"
 
   # Offer options menu
   while true; do
@@ -109,10 +95,7 @@ catch_errors() {
       options+=("Retry installation")
     fi
 
-    # Add upload option if internet is available
-    if ping -c 1 -W 1 1.1.1.1 >/dev/null 2>&1; then
-      options+=("Upload log for support")
-    fi
+    options+=("Report issue")
 
     # Add remaining options
     options+=("View full log")
@@ -132,8 +115,12 @@ catch_errors() {
         tail "$OMUNTU_INSTALL_LOG_FILE"
       fi
       ;;
-    "Upload log for support")
-      omarchy-upload-log
+    "Report issue")
+      echo ""
+      echo "Report issues at: $OMUNTU_SUPPORT_URL"
+      echo "Include the log output shown above in your report."
+      echo "Full log: $OMUNTU_INSTALL_LOG_FILE"
+      echo ""
       ;;
     "Exit" | "")
       exit 1

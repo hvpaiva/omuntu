@@ -63,33 +63,18 @@ if [[ $PRINT_ONLY = "true" ]]; then
 fi
 
 OPTIONS=("View log" "Save in current directory")
-if ping -c 1 8.8.8.8 >/dev/null 2>&1; then
-  OPTIONS=("Upload log" "${OPTIONS[@]}")
-fi
 
 ACTION=$(gum choose "${OPTIONS[@]}")
 
 case "$ACTION" in
-  "Upload log")
-    echo "Uploading debug log to 0x0.st..."
-    URL=$(curl -sF "file=@$LOG_FILE" -Fexpires=24 https://0x0.st)
-    if (( $? == 0 )) && [[ -n $URL ]]; then
-      echo "✓ Log uploaded successfully!"
-      echo "Share this URL:"
-      echo ""
-      echo "  $URL"
-      echo ""
-      echo "This link will expire in 24 hours."
-    else
-      echo "Error: Failed to upload log file"
-      exit 1
-    fi
-    ;;
   "View log")
     less "$LOG_FILE"
     ;;
   "Save in current directory")
-    cp "$LOG_FILE" "./omarchy-debug.log"
-    echo "✓ Log saved to $(pwd)/omarchy-debug.log"
+    cp "$LOG_FILE" "./omuntu-debug.log"
+    echo "✓ Log saved to $(pwd)/omuntu-debug.log"
+    echo ""
+    echo "To report issues, open: https://github.com/hvpaiva/omuntu/issues"
+    echo "Attach the debug log to your report."
     ;;
 esac

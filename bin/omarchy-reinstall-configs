@@ -15,6 +15,4 @@ echo '[[ -f ~/.bashrc ]] && . ~/.bashrc' | tee ~/.bash_profile >/dev/null
 
 $(bash $OMUNTU_PATH/install/config/theme.sh)
 
-omarchy-refresh-limine
-omarchy-refresh-plymouth
 omarchy-nvim-setup

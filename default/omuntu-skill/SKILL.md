@@ -13,7 +13,7 @@ description: >
 
 # Omuntu Skill
 
-Manage [Omuntu](https://omuntu.org/) Linux systems - a beautiful, modern, opinionated Arch Linux distribution with Hyprland.
+Manage [Omuntu](https://github.com/hvpaiva/omuntu) Linux systems - a beautiful, modern Hyprland desktop environment for Ubuntu 24.04 LTS.
 
 This skill is for end-user customization on installed systems.
 It is not for contributing to Omuntu source code.
@@ -74,7 +74,7 @@ Omuntu is built on:
 
 | Component | Purpose | Config Location |
 |-----------|---------|-----------------|
-| **Arch Linux** | Base OS | `/etc/`, `~/.config/` |
+| **Ubuntu 24.04** | Base OS | `/etc/`, `~/.config/` |
 | **Hyprland** | Wayland compositor/WM | `~/.config/hypr/` |
 | **Waybar** | Status bar | `~/.config/waybar/` |
 | **Walker** | App launcher | `~/.config/walker/` |

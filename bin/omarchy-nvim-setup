@@ -1,0 +1,146 @@
+#!/bin/bash
+set -e
+
+# Set up LazyVim with Omuntu customizations
+# Equivalent of the omarchy-nvim AUR package for Ubuntu
+
+NVIM_CONFIG="$HOME/.config/nvim"
+NVIM_DATA="$HOME/.local/share/nvim"
+NVIM_STATE="$HOME/.local/state/nvim"
+NVIM_CACHE="$HOME/.cache/nvim"
+OMUNTU_PATH="${OMUNTU_PATH:-$HOME/.local/share/omuntu}"
+
+# Backup existing config if present
+if [[ -d "$NVIM_CONFIG" ]]; then
+  if command -v gum &>/dev/null; then
+    if ! gum confirm "Existing neovim config found. Backup and replace?"; then
+      echo "Skipping neovim setup"
+      exit 0
+    fi
+  fi
+  backup_dir="$NVIM_CONFIG.bak.$(date +%s)"
+  mv "$NVIM_CONFIG" "$backup_dir"
+  echo "Backed up existing config to $backup_dir"
+fi
+
+# Clear neovim state
+rm -rf "$NVIM_DATA" "$NVIM_STATE" "$NVIM_CACHE"
+
+# Clone LazyVim starter
+echo "Setting up LazyVim..."
+git clone --depth 1 https://github.com/LazyVim/starter "$NVIM_CONFIG"
+rm -rf "$NVIM_CONFIG/.git"
+
+# Enable neo-tree extra
+cat > "$NVIM_CONFIG/lazyvim.json" << 'EOF'
+{"extras": ["lazyvim.plugins.extras.editor.neo-tree"], "install_version": 8, "version": 8}
+EOF
+
+# Disable relative line numbers
+echo "vim.opt.relativenumber = false" >> "$NVIM_CONFIG/lua/config/options.lua"
+
+# Install all theme plugins (lazy loaded)
+cat > "$NVIM_CONFIG/lua/plugins/all-themes.lua" << 'LUAEOF'
+return {
+  { "folke/tokyonight.nvim", lazy = true },
+  { "catppuccin/nvim", name = "catppuccin", lazy = true },
+  { "sainnhe/everforest", lazy = true },
+  { "rebelot/kanagawa.nvim", lazy = true },
+  { "ellisonleao/gruvbox.nvim", lazy = true },
+  { "rose-pine/neovim", name = "rose-pine", lazy = true },
+  { "shaunsingh/nord.nvim", lazy = true },
+  { "xero/miasma.nvim", lazy = true },
+  { "kepano/flexoki-neovim", name = "flexoki", lazy = true },
+  { "ribru17/bamboo.nvim", lazy = true },
+}
+LUAEOF
+
+# Disable news alerts
+cat > "$NVIM_CONFIG/lua/plugins/disable-news-alert.lua" << 'LUAEOF'
+return {
+  {
+    "folke/snacks.nvim",
+    opts = { notifier = { enabled = false } },
+  },
+}
+LUAEOF
+
+# Disable animated scrolling
+cat > "$NVIM_CONFIG/lua/plugins/snacks-animated-scrolling-off.lua" << 'LUAEOF'
+return {
+  {
+    "folke/snacks.nvim",
+    opts = { scroll = { enabled = false } },
+  },
+}
+LUAEOF
+
+# Theme hot-reload support
+cat > "$NVIM_CONFIG/lua/plugins/omuntu-theme-hotreload.lua" << 'LUAEOF'
+return {
+  {
+    "LazyVim/LazyVim",
+    init = function()
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "LazyReload",
+        callback = function()
+          local theme_path = vim.fn.expand("~/.config/nvim/lua/plugins/theme.lua")
+          if vim.fn.filereadable(theme_path) == 1 then
+            package.loaded["plugins.theme"] = nil
+            vim.cmd("colorscheme " .. (vim.g.colors_name or "default"))
+          end
+        end,
+      })
+    end,
+  },
+}
+LUAEOF
+
+# Transparency support
+mkdir -p "$NVIM_CONFIG/plugin/after"
+cat > "$NVIM_CONFIG/plugin/after/transparency.lua" << 'LUAEOF'
+local transparent_groups = {
+  "Normal", "NormalNC", "NormalFloat", "FloatBorder", "FloatTitle",
+  "SignColumn", "LineNr", "CursorLineNr", "EndOfBuffer", "MsgArea",
+  "NeoTreeNormal", "NeoTreeNormalNC", "NeoTreeEndOfBuffer",
+  "NotifyINFOBody", "NotifyWARNBody", "NotifyERRORBody",
+  "NotifyDEBUGBody", "NotifyTRACEBody",
+  "NotifyINFOBorder", "NotifyWARNBorder", "NotifyERRORBorder",
+  "NotifyDEBUGBorder", "NotifyTRACEBorder",
+  "TelescopeNormal", "TelescopeBorder", "TelescopePromptNormal",
+  "TelescopePromptBorder", "TelescopeResultsNormal", "TelescopeResultsBorder",
+  "TelescopePreviewNormal", "TelescopePreviewBorder",
+}
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+  callback = function()
+    for _, group in ipairs(transparent_groups) do
+      vim.api.nvim_set_hl(0, group, { bg = "NONE", ctermbg = "NONE" })
+    end
+  end,
+})
+
+-- Apply immediately
+for _, group in ipairs(transparent_groups) do
+  vim.api.nvim_set_hl(0, group, { bg = "NONE", ctermbg = "NONE" })
+end
+LUAEOF
+
+# Create theme symlink from current omuntu theme
+THEME_LINK="$HOME/.config/omuntu/current/theme/neovim.lua"
+if [[ -f "$THEME_LINK" ]]; then
+  ln -sf "$THEME_LINK" "$NVIM_CONFIG/lua/plugins/theme.lua"
+  echo "Linked current theme to neovim"
+else
+  # Default to Tokyo Night
+  ln -sf "$OMUNTU_PATH/themes/tokyo-night/neovim.lua" "$NVIM_CONFIG/lua/plugins/theme.lua"
+  echo "Defaulted to Tokyo Night theme"
+fi
+
+# Sync plugins headlessly
+echo "Installing neovim plugins (this may take a moment)..."
+if nvim --headless "+Lazy! sync" "+qa!" 2>/dev/null; then
+  echo "Neovim setup complete!"
+else
+  echo "Plugin sync had issues - they will install on first launch"
+fi

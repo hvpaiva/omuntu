@@ -1,3 +1,9 @@
+# Stop sudo keepalive
+if [[ -n ${SUDO_KEEPALIVE_PID:-} ]]; then
+  kill "$SUDO_KEEPALIVE_PID" 2>/dev/null || true
+  wait "$SUDO_KEEPALIVE_PID" 2>/dev/null || true
+fi
+
 stop_install_log
 
 echo_in_style() {

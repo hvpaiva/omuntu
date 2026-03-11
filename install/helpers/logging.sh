@@ -72,22 +72,6 @@ stop_install_log() {
     echo "" >>"$OMUNTU_INSTALL_LOG_FILE"
     echo "=== Installation Time Summary ===" >>"$OMUNTU_INSTALL_LOG_FILE"
 
-    if [[ -f "/var/log/archinstall/install.log" ]]; then
-      ARCHINSTALL_START=$(grep -m1 '^\[' /var/log/archinstall/install.log 2>/dev/null | sed 's/^\[\([^]]*\)\].*/\1/' || true)
-      ARCHINSTALL_END=$(grep 'Installation completed without any errors' /var/log/archinstall/install.log 2>/dev/null | sed 's/^\[\([^]]*\)\].*/\1/' || true)
-
-      if [[ -n $ARCHINSTALL_START ]] && [[ -n $ARCHINSTALL_END ]]; then
-        ARCH_START_EPOCH=$(date -d "$ARCHINSTALL_START" +%s)
-        ARCH_END_EPOCH=$(date -d "$ARCHINSTALL_END" +%s)
-        ARCH_DURATION=$((ARCH_END_EPOCH - ARCH_START_EPOCH))
-
-        ARCH_MINS=$((ARCH_DURATION / 60))
-        ARCH_SECS=$((ARCH_DURATION % 60))
-
-        echo "Archinstall: ${ARCH_MINS}m ${ARCH_SECS}s" >>"$OMUNTU_INSTALL_LOG_FILE"
-      fi
-    fi
-
     if [[ -n $OMUNTU_START_TIME ]]; then
       OMUNTU_START_EPOCH=$(date -d "$OMUNTU_START_TIME" +%s)
       OMUNTU_END_EPOCH=$(date -d "$OMUNTU_END_TIME" +%s)
@@ -96,14 +80,7 @@ stop_install_log() {
       OMUNTU_MINS=$((OMUNTU_DURATION / 60))
       OMUNTU_SECS=$((OMUNTU_DURATION % 60))
 
-      echo "Omuntu:     ${OMUNTU_MINS}m ${OMUNTU_SECS}s" >>"$OMUNTU_INSTALL_LOG_FILE"
-
-      if [[ -n $ARCH_DURATION ]]; then
-        TOTAL_DURATION=$((ARCH_DURATION + OMUNTU_DURATION))
-        TOTAL_MINS=$((TOTAL_DURATION / 60))
-        TOTAL_SECS=$((TOTAL_DURATION % 60))
-        echo "Total:       ${TOTAL_MINS}m ${TOTAL_SECS}s" >>"$OMUNTU_INSTALL_LOG_FILE"
-      fi
+      echo "Total:      ${OMUNTU_MINS}m ${OMUNTU_SECS}s" >>"$OMUNTU_INSTALL_LOG_FILE"
     fi
     echo "=================================" >>"$OMUNTU_INSTALL_LOG_FILE"
 

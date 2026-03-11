@@ -13,7 +13,12 @@ echo "Building SwayOSD from source..."
 BUILD_DIR=$(mktemp -d)
 cd "$BUILD_DIR"
 
-sudo apt-get install -y libgtk-3-dev libgtk-layer-shell-dev libpulse-dev libevdev-dev libudev-dev libinput-dev rustc cargo
+# All build dependencies: Rust, SASS compiler, GTK3, layer-shell, audio, input
+sudo apt-get install -y \
+  rustc cargo sassc \
+  libgtk-3-dev libgtk-layer-shell-dev libpulse-dev \
+  libevdev-dev libudev-dev libinput-dev \
+  libglib2.0-dev libdbus-1-dev
 
 git clone https://github.com/ErikReider/SwayOSD.git
 cd SwayOSD

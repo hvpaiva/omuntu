@@ -1,15 +1,15 @@
 #!/bin/bash
 
-# Run the Omarchy screensaver using random effects from TTE.
+# Run the Omuntu screensaver using random effects from TTE.
 
 screensaver_in_focus() {
-  hyprctl activewindow -j | jq -e '.class == "org.omarchy.screensaver"' >/dev/null 2>&1
+  hyprctl activewindow -j | jq -e '.class == "org.omuntu.screensaver"' >/dev/null 2>&1
 }
 
 exit_screensaver() {
   hyprctl keyword cursor:invisible false &>/dev/null || true
   pkill -x tte 2>/dev/null
-  pkill -f org.omarchy.screensaver 2>/dev/null
+  pkill -f org.omuntu.screensaver 2>/dev/null
   exit 0
 }
 

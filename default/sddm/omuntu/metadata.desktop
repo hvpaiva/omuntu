@@ -1,0 +1,6 @@
+[SddmGreeterTheme]
+Name=Omuntu
+Description=Minimal terminal-style login theme matching the Limine bootloader aesthetic
+Author=Omuntu
+Type=sddm-theme
+Version=1.0

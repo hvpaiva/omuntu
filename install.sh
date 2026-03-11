@@ -3,16 +3,16 @@
 # Exit immediately if a command exits with a non-zero status
 set -eEo pipefail
 
-# Define Omarchy locations
-export OMARCHY_PATH="$HOME/.local/share/omarchy"
-export OMARCHY_INSTALL="$OMARCHY_PATH/install"
-export OMARCHY_INSTALL_LOG_FILE="/var/log/omarchy-install.log"
-export PATH="$OMARCHY_PATH/bin:$PATH"
+# Define Omuntu locations
+export OMUNTU_PATH="$HOME/.local/share/omuntu"
+export OMUNTU_INSTALL="$OMUNTU_PATH/install"
+export OMUNTU_INSTALL_LOG_FILE="/var/log/omuntu-install.log"
+export PATH="$OMUNTU_PATH/bin:$PATH"
 
 # Install
-source "$OMARCHY_INSTALL/helpers/all.sh"
-source "$OMARCHY_INSTALL/preflight/all.sh"
-source "$OMARCHY_INSTALL/packaging/all.sh"
-source "$OMARCHY_INSTALL/config/all.sh"
-source "$OMARCHY_INSTALL/login/all.sh"
-source "$OMARCHY_INSTALL/post-install/all.sh"
+source "$OMUNTU_INSTALL/helpers/all.sh"
+source "$OMUNTU_INSTALL/preflight/all.sh"
+source "$OMUNTU_INSTALL/packaging/all.sh"
+source "$OMUNTU_INSTALL/config/all.sh"
+source "$OMUNTU_INSTALL/login/all.sh"
+source "$OMUNTU_INSTALL/post-install/all.sh"

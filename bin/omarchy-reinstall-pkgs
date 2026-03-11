@@ -1,14 +1,14 @@
 #!/bin/bash
 set -e
 
-# Reinstall all default Omarchy packages from the stable channel and downgrade any packages that are too new.
+# Reinstall all default Omuntu packages.
 
-# Set the package repository to the stable mirrors
-omarchy-refresh-pacman
-
-# Downgrade any packages to the stable setup
-sudo pacman -Suu --noconfirm
+OMUNTU_PATH=${OMUNTU_PATH:-$HOME/.local/share/omuntu}
 
 # Ensure all packages are installed
-mapfile -t packages < <(grep -v '^#' "$OMARCHY_PATH/install/omarchy-base.packages" | grep -v '^$')
-sudo pacman -Syu --noconfirm --needed "${packages[@]}"
+mapfile -t apt_packages < <(grep -v '^#' "$OMUNTU_PATH/install/packages/apt.packages" | grep -v '^$')
+sudo apt-get update
+sudo apt-get install -y "${apt_packages[@]}"
+
+mapfile -t ppa_packages < <(grep -v '^#' "$OMUNTU_PATH/install/packages/ppa.packages" | grep -v '^$')
+sudo apt-get install -y "${ppa_packages[@]}"

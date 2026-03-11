@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Set the branch for Omarchy's git repository.
+# Set the branch for Omuntu's git repository.
 
 if (($# == 0)); then
   echo "Usage: omarchy-branch-set [master|rc|dev]"
@@ -14,4 +14,4 @@ if [[ $branch != "master" && $branch != "rc" && $branch != "dev" ]]; then
   exit 1
 fi
 
-git -C $OMARCHY_PATH switch $branch
+git -C $OMUNTU_PATH switch $branch

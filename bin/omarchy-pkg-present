@@ -3,7 +3,7 @@
 # Returns true if all of the named packages are installed on the system (or false if any of them are missing).
 
 for pkg in "$@"; do
-  pacman -Q "$pkg" &>/dev/null || exit 1
+  dpkg -l "$pkg" 2>/dev/null | grep -q '^ii' || exit 1
 done
 
 exit 0

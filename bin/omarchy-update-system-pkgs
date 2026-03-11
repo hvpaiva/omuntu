@@ -3,4 +3,5 @@
 set -e
 
 echo -e "\e[32m\nUpdate system packages\e[0m"
-sudo pacman -Syyu --noconfirm
+sudo apt-get update
+sudo apt-get dist-upgrade -y

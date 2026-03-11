@@ -1,3 +1,8 @@
 #!/bin/bash
 
-date -d "$(grep upgraded /var/log/pacman.log | tail -1 | sed -E 's/\[([^]]+)\].*/\1/')" "+%A, %B %d %Y at %H:%M"
+# Show when packages were last updated
+if [[ -f /var/log/apt/history.log ]]; then
+  date -d "$(grep 'Start-Date' /var/log/apt/history.log | tail -1 | sed 's/Start-Date: //')" "+%A, %B %d %Y at %H:%M" 2>/dev/null || echo "Unknown"
+else
+  echo "Unknown"
+fi

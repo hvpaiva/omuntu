@@ -1,16 +1,10 @@
 #!/bin/bash
 
-# Add the named packages to the system from the AUR if they're missing. Returns false if it couldn't be done.
-
-if omarchy-pkg-missing "$@"; then
-  yay -S --noconfirm --needed "$@" || exit 1
-fi
+# Add the named packages from Flatpak (replaces AUR on Ubuntu).
 
 for pkg in "$@"; do
-  # Secondary check to handle states where pacman doesn't actually register an error
-  if ! pacman -Q "$pkg" &>/dev/null; then
-    echo -e "\033[31mError: Package '$pkg' did not install\033[0m" >&2
-    exit 1
+  if ! flatpak list --app 2>/dev/null | grep -qi "$pkg"; then
+    flatpak install -y flathub "$pkg" || exit 1
   fi
 done
 

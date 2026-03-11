@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Launch the Omarchy screensaver in the default terminal on the system with the correct font configuration.
+# Launch the Omuntu screensaver in the default terminal on the system with the correct font configuration.
 
 # Exit early if we don't have the tte show
 if ! command -v tte &>/dev/null; then
@@ -8,10 +8,10 @@ if ! command -v tte &>/dev/null; then
 fi
 
 # Exit early if screensave is already running
-pgrep -f org.omarchy.screensaver && exit 0
+pgrep -f org.omuntu.screensaver && exit 0
 
 # Allow screensaver to be turned off but also force started
-if [[ -f ~/.local/state/omarchy/toggles/screensaver-off ]] && [[ $1 != "force" ]]; then
+if [[ -f ~/.local/state/omuntu/toggles/screensaver-off ]] && [[ $1 != "force" ]]; then
   exit 1
 fi
 
@@ -27,20 +27,20 @@ for m in $(hyprctl monitors -j | jq -r '.[] | .name'); do
   case $terminal in
   *Alacritty*)
     hyprctl dispatch exec -- \
-      alacritty --class=org.omarchy.screensaver \
-      --config-file ~/.local/share/omarchy/default/alacritty/screensaver.toml \
+      alacritty --class=org.omuntu.screensaver \
+      --config-file ~/.local/share/omuntu/default/alacritty/screensaver.toml \
       -e omarchy-cmd-screensaver
     ;;
   *ghostty*)
     hyprctl dispatch exec -- \
-      ghostty --class=org.omarchy.screensaver \
-      --config-file=~/.local/share/omarchy/default/ghostty/screensaver \
+      ghostty --class=org.omuntu.screensaver \
+      --config-file=~/.local/share/omuntu/default/ghostty/screensaver \
       --font-size=18 \
       -e omarchy-cmd-screensaver
     ;;
   *kitty*)
     hyprctl dispatch exec -- \
-      kitty --class=org.omarchy.screensaver \
+      kitty --class=org.omuntu.screensaver \
       --override font_size=18 \
       --override window_padding_width=0 \
       -e omarchy-cmd-screensaver

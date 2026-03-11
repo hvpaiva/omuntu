@@ -1,19 +1,19 @@
 #!/bin/bash
 set -e
 
-# Overwrite all user configs with the Omarchy defaults.
+# Overwrite all user configs with the Omuntu defaults.
 
 if (( EUID == 0 )); then
   echo "Error: This script should not be run as root"
   exit 1
 fi
 
-echo "Resetting all Omarchy configs"
-cp -R ~/.local/share/omarchy/config/* ~/.config/
-cp ~/.local/share/omarchy/default/bashrc ~/.bashrc
+echo "Resetting all Omuntu configs"
+cp -R ~/.local/share/omuntu/config/* ~/.config/
+cp ~/.local/share/omuntu/default/bashrc ~/.bashrc
 echo '[[ -f ~/.bashrc ]] && . ~/.bashrc' | tee ~/.bash_profile >/dev/null
 
-$(bash $OMARCHY_PATH/install/config/theme.sh)
+$(bash $OMUNTU_PATH/install/config/theme.sh)
 
 omarchy-refresh-limine
 omarchy-refresh-plymouth

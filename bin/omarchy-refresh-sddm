@@ -1,6 +1,3 @@
 #!/bin/bash
-
-# Refresh the SDDM theme from default
-
-sudo rm -rf /usr/share/sddm/themes/omarchy
-sudo cp -r $OMARCHY_PATH/default/sddm/omarchy /usr/share/sddm/themes/omarchy
+# SDDM is not managed by Omuntu. This is a no-op stub.
+echo "SDDM theming is not managed by Omuntu."

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# omarchy-theme-install: Install a new theme from a git repo for Omarchy
+# omarchy-theme-install: Install a new theme from a git repo for Omuntu
 # Usage: omarchy-theme-install <git-repo-url>
 
 if [[ -z $1 ]]; then

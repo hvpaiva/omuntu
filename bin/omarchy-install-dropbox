@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# Install and start the Dropbox service. Must then be authenticated via the web.
+# Install and start the Dropbox service.
 
 echo "Installing all dependencies..."
-omarchy-pkg-add dropbox dropbox-cli libappindicator-gtk3 python-gpgme nautilus-dropbox
+sudo apt-get install -y nautilus-dropbox
 
 echo "Starting Dropbox..."
-uwsm-app -- dropbox-cli start &>/dev/null &
-echo "See Dropbox icon behind  hover tray in top right and right-click for setup."
+dropbox start -i &
+echo "See Dropbox icon in system tray for setup."

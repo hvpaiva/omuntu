@@ -2,9 +2,9 @@
 
 set -e
 
-echo -e "\e[32mUpdate Omarchy\e[0m"
+echo -e "\e[32mUpdate Omuntu\e[0m"
 
 omarchy-update-time
 
-git -C $OMARCHY_PATH pull --autostash
-git -C $OMARCHY_PATH --no-pager diff --check || git -C $OMARCHY_PATH reset --merge
+git -C $OMUNTU_PATH pull --autostash
+git -C $OMUNTU_PATH --no-pager diff --check || git -C $OMUNTU_PATH reset --merge

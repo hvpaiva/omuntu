@@ -1,11 +1,9 @@
 #!/bin/bash
 
-update_log="/tmp/omarchy-update.log"
+update_log="/tmp/omuntu-update.log"
 
-# Check for initramfs generation failure
-if grep -q "Updating linux initcpios" "$update_log"; then
-  if ! grep -q "Initcpio image generation successful" "$update_log"; then
-    echo -e '\e[31mError: Initramfs generation may have failed. Review logs before restart.\e[0m'
-    echo
-  fi
+# Check for any critical errors in the update log
+if [[ -f "$update_log" ]] && grep -qi "error\|failed" "$update_log"; then
+  echo -e '\e[33mWarning: Some errors detected in update log. Review output above.\e[0m'
+  echo
 fi

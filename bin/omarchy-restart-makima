@@ -1,5 +1,5 @@
 #!/bin/bash
 
-# Restart makima - key remapping service for remapping Copilot key to Omarchy Menu
+# Restart makima - key remapping service for remapping Copilot key to Omuntu Menu
 
 sudo systemctl restart makima

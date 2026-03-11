@@ -1,3 +1,33 @@
-# Install all base packages
-mapfile -t packages < <(grep -v '^#' "$OMARCHY_INSTALL/omarchy-base.packages" | grep -v '^$')
-omarchy-pkg-add "${packages[@]}"
+# Install all apt packages
+mapfile -t apt_packages < <(grep -v '^#' "$OMUNTU_INSTALL/packages/apt.packages" | grep -v '^$')
+omarchy-pkg-add "${apt_packages[@]}"
+
+# Install PPA packages
+mapfile -t ppa_packages < <(grep -v '^#' "$OMUNTU_INSTALL/packages/ppa.packages" | grep -v '^$')
+omarchy-pkg-add "${ppa_packages[@]}"
+
+# Install Flatpak packages
+mapfile -t flatpak_packages < <(grep -v '^#' "$OMUNTU_INSTALL/packages/flatpak.packages" | grep -v '^$')
+for pkg in "${flatpak_packages[@]}"; do
+  flatpak install -y flathub "$pkg" || true
+done
+
+# Install cargo packages
+if command -v cargo &>/dev/null; then
+  mapfile -t cargo_packages < <(grep -v '^#' "$OMUNTU_INSTALL/packages/cargo.packages" | grep -v '^$')
+  for pkg in "${cargo_packages[@]}"; do
+    cargo install "$pkg" 2>/dev/null || true
+  done
+fi
+
+# Install pip packages
+mapfile -t pip_packages < <(grep -v '^#' "$OMUNTU_INSTALL/packages/pip.packages" | grep -v '^$')
+for pkg in "${pip_packages[@]}"; do
+  pip install --user "$pkg" 2>/dev/null || true
+done
+
+# Create symlinks for differently-named binaries
+if command -v fdfind &>/dev/null && ! command -v fd &>/dev/null; then
+  mkdir -p ~/.local/bin
+  ln -sf "$(which fdfind)" ~/.local/bin/fd
+fi

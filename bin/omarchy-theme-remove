@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# omarchy-theme-remove: Remove a theme from Omarchy by name
+# omarchy-theme-remove: Remove a theme from Omuntu by name
 # Usage: omarchy-theme-remove <theme-name>
 
 if [[ -z $1 ]]; then

@@ -3,14 +3,14 @@
 # Run all pending migrations to bring the system in line with the installed version.
 
 # Where we store an empty file for each migration that has already been performed.
-STATE_DIR="$HOME/.local/state/omarchy/migrations"
+STATE_DIR="$HOME/.local/state/omuntu/migrations"
 mkdir -p "$STATE_DIR"
 
 # Skipped migrations are tracked separately
 mkdir -p "$STATE_DIR/skipped"
 
 # Run any pending migrations
-for file in ~/.local/share/omarchy/migrations/*.sh; do
+for file in ~/.local/share/omuntu/migrations/*.sh; do
   filename=$(basename "$file")
 
   if [[ ! -f $STATE_DIR/$filename && ! -f $STATE_DIR/skipped/$filename ]]; then

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Setup makima - key remapping service for remapping Copilot key to Omarchy Menu
+# Setup makima - key remapping service for remapping Copilot key to Omuntu Menu
 
 CONFIG_FILE="$HOME/.config/makima/AT Translated Set 2 keyboard.toml"
 
@@ -8,7 +8,7 @@ if [[ ! -f $CONFIG_FILE ]]; then
   omarchy-pkg-add makima-bin
 
   mkdir -p "$HOME/.config/makima"
-  cp "$OMARCHY_PATH/default/makima/AT Translated Set 2 keyboard.toml" "$CONFIG_FILE"
+  cp "$OMUNTU_PATH/default/makima/AT Translated Set 2 keyboard.toml" "$CONFIG_FILE"
 
   sudo mkdir -p /etc/systemd/system/makima.service.d
   sudo tee /etc/systemd/system/makima.service.d/override.conf >/dev/null <<EOF

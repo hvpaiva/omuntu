@@ -1,6 +1,6 @@
-# Copy over Omarchy configs
+# Copy over Omuntu configs
 mkdir -p ~/.config
-cp -R ~/.local/share/omarchy/config/* ~/.config/
+cp -R ~/.local/share/omuntu/config/* ~/.config/
 
-# Use default bashrc from Omarchy
-cp ~/.local/share/omarchy/default/bashrc ~/.bashrc
+# Use default bashrc from Omuntu
+cp ~/.local/share/omuntu/default/bashrc ~/.bashrc

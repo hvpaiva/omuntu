@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copies the named config from ~/.local/share/omarchy/config/X/Y/Z -> ~/.config/X/Y/Z.
+# Copies the named config from ~/.local/share/omuntu/config/X/Y/Z -> ~/.config/X/Y/Z.
 # If the config already exists, a backup of the existing will be taken as .bak.TIMESTAMP.
 
 config_file=$1
@@ -10,7 +10,7 @@ if [[ -z $config_file ]]; then
   Usage: $0 [config_file]
 
   Must provide a file path from the .config directory to be refreshed.
-  To copy ~/.local/share/omarchy/config/hypr/hyprlock.conf to ~/.config/hypr/hyprlock.conf
+  To copy ~/.local/share/omuntu/config/hypr/hyprlock.conf to ~/.config/hypr/hyprlock.conf
 
     $0 hypr/hyprlock.conf
 USAGE
@@ -19,7 +19,7 @@ fi
 
 # Backup the destination file (with timestamp) to avoid clobbering (Ex: hyprlock.conf.bak.1753817951)
 user_config_file="${HOME}/.config/$config_file"
-default_config_file="${HOME}/.local/share/omarchy/config/$config_file"
+default_config_file="${HOME}/.local/share/omuntu/config/$config_file"
 backup_config_file="$user_config_file.bak.$(date +%s)"
 
 if [[ -f $user_config_file ]]; then
@@ -33,7 +33,7 @@ if [[ -f $user_config_file ]]; then
   if cmp -s "$user_config_file" "$backup_config_file"; then
     rm "$backup_config_file"
   else
-    echo -e "\e[31mReplaced $user_config_file with new Omarchy default.\nSaved backup as ${backup_config_file}.\n\n\e[32mChanges:\e[0m"
+    echo -e "\e[31mReplaced $user_config_file with new Omuntu default.\nSaved backup as ${backup_config_file}.\n\n\e[32mChanges:\e[0m"
     diff "$user_config_file" "$backup_config_file" || true
   fi
 else

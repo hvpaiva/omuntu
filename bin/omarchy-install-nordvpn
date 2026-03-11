@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# Install the NordVPN service with optional GUI.
+# Install the NordVPN service.
 
 echo "Installing NordVPN..."
-omarchy-pkg-aur-add nordvpn-bin
+curl -sSf https://downloads.nordcdn.com/apps/linux/install.sh | sh
 
 echo "Enabling NordVPN daemon..."
 sudo systemctl enable --now nordvpnd

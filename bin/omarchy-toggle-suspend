@@ -1,6 +1,6 @@
 #!/bin/bash
 
-STATE_FILE=~/.local/state/omarchy/toggles/suspend-off
+STATE_FILE=~/.local/state/omuntu/toggles/suspend-off
 
 if [[ -f $STATE_FILE ]]; then
   rm -f $STATE_FILE

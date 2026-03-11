@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# Returns true if the AUR is up and available.
-# Used by omarchy-update-system-pkgs to ensure the AUR is available before updating packages from it.
+# Returns true if Flathub is up and available.
 
-curl -sf --connect-timeout 30 --retry 3 --retry-delay 3 -A "omarchy-update" \
-  "https://aur.archlinux.org/rpc/?v=5&type=info&arg=base" >/dev/null
+curl -sf --connect-timeout 30 --retry 3 --retry-connrefused "https://flathub.org/api/v2/status" >/dev/null 2>&1

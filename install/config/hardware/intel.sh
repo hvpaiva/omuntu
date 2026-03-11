@@ -1,11 +1,8 @@
 # This installs hardware video acceleration for Intel GPUs
-# Check if we have an Intel GPU at all
 if INTEL_GPU=$(lspci | grep -iE 'vga|3d|display' | grep -i 'intel'); then
-  # HD Graphics / Iris / Xe / Arc use intel-media-driver
   if [[ ${INTEL_GPU,,} =~ (hd\ graphics|uhd\ graphics|xe|iris|arc) ]]; then
-    omarchy-pkg-add intel-media-driver
+    omarchy-pkg-add intel-media-va-driver
   elif [[ ${INTEL_GPU,,} =~ "gma" ]]; then
-    # Older generations from 2008 to ~2014-2017 use libva-intel-driver
-    omarchy-pkg-add libva-intel-driver
+    omarchy-pkg-add i965-va-driver
   fi
 fi

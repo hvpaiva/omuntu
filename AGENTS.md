@@ -29,7 +29,7 @@ Use these instead of raw shell commands:
 
 - `omarchy-cmd-missing` / `omarchy-cmd-present` - check for commands
 - `omarchy-pkg-missing` / `omarchy-pkg-present` - check for packages
-- `omarchy-pkg-add` - install packages (handles both pacman and AUR)
+- `omarchy-pkg-add` - install packages (handles apt and Flatpak)
 - `omarchy-hw-asus-rog` - detect ASUS ROG hardware (and similar `hw-*` commands)
 
 # Config Structure
@@ -46,7 +46,7 @@ To copy a default config to user config with automatic backup:
 omarchy-refresh-config hypr/hyprlock.conf
 ```
 
-This copies `~/.local/share/omarchy/config/hypr/hyprlock.conf` to `~/.config/hypr/hyprlock.conf`.
+This copies `~/.local/share/omuntu/config/hypr/hyprlock.conf` to `~/.config/hypr/hyprlock.conf`.
 
 # Migrations
 
@@ -55,7 +55,7 @@ To create a new migration, run `omarchy-dev-add-migration --no-edit`. This creat
 Migration format:
 - No shebang line
 - Start with an `echo` describing what the migration does
-- Use `$OMARCHY_PATH` to reference the omarchy directory
+- Use `$OMUNTU_PATH` to reference the omuntu directory
 
 Example:
 ```bash

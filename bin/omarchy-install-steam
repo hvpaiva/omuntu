@@ -1,9 +1,12 @@
 #!/bin/bash
 
-# Install and launch Steam after first letting the user pick the correct grahics card drivers.
+# Install and launch Steam.
 
 set -e
 
-echo "Now pick dependencies matching your graphics card"
-sudo pacman -S steam
+echo "Installing Steam..."
+# Enable multiverse repository for Steam
+sudo add-apt-repository -y multiverse
+sudo apt-get update
+sudo apt-get install -y steam
 setsid gtk-launch steam >/dev/null 2>&1 &

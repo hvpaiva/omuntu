@@ -1,5 +1,6 @@
 #!/bin/bash
-# Build SwayOSD from source (not available in Ubuntu repos)
+# Build SwayOSD from source (not available in Ubuntu 24.04 repos)
+# Requires building gtk4-layer-shell first (not in 24.04 repos either)
 
 if command -v swayosd-server &>/dev/null; then
   echo "SwayOSD already installed"
@@ -10,29 +11,43 @@ set -e
 
 echo "Building SwayOSD from source..."
 
-BUILD_DIR=$(mktemp -d)
-cd "$BUILD_DIR"
-
-# Build dependencies: SASS compiler, GTK4, layer-shell, audio, input
+# All build dependencies
 sudo apt-get install -y \
   sassc \
-  libgtk-4-dev libgtk4-layer-shell-dev libpulse-dev \
-  libevdev-dev libudev-dev libinput-dev \
-  libglib2.0-dev libdbus-1-dev
+  libgtk-4-dev libpulse-dev libinput-dev \
+  libevdev-dev libudev-dev libdbus-1-dev \
+  libglib2.0-dev libcairo2-dev \
+  libwayland-dev wayland-protocols \
+  gobject-introspection libgirepository1.0-dev \
+  gtk-doc-tools valac
 
 # Ubuntu 24.04 ships Rust 1.75 but SwayOSD needs edition2024 (Rust 1.85+)
-# Install latest stable Rust via rustup if needed
 if ! command -v rustc &>/dev/null || [[ $(rustc --version | grep -oP '\d+\.\d+' | head -1) < "1.85" ]]; then
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path
   source "$HOME/.cargo/env"
 fi
 
+BUILD_DIR=$(mktemp -d)
+cd "$BUILD_DIR"
+
+# Step 1: Build gtk4-layer-shell (not in Ubuntu 24.04 repos, first available in 24.10)
+if ! pkg-config --exists gtk4-layer-shell-0; then
+  echo "Building gtk4-layer-shell from source..."
+  git clone https://github.com/wmww/gtk4-layer-shell.git
+  cd gtk4-layer-shell
+  meson setup build --prefix=/usr
+  ninja -C build
+  sudo ninja -C build install
+  sudo ldconfig
+  cd "$BUILD_DIR"
+fi
+
+# Step 2: Build SwayOSD
 git clone https://github.com/ErikReider/SwayOSD.git
 cd SwayOSD
-
-meson setup build
-ninja -C build
-sudo ninja -C build install
+meson setup build --prefix=/usr --buildtype release
+meson compile -C build
+sudo meson install -C build
 
 cd /
 rm -rf "$BUILD_DIR"

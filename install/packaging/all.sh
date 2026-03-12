@@ -1,3 +1,4 @@
+run_logged $OMUNTU_INSTALL/packaging/rustup.sh
 run_logged $OMUNTU_INSTALL/packaging/base.sh
 run_logged $OMUNTU_INSTALL/packaging/fonts.sh
 run_logged $OMUNTU_INSTALL/packaging/nvim.sh

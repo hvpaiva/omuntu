@@ -21,14 +21,7 @@ sudo apt-get install -y \
   gobject-introspection libgirepository1.0-dev \
   gtk-doc-tools valac
 
-# Ubuntu 24.04 ships Rust 1.75 but SwayOSD needs edition2024 (Rust 1.85+)
-# Ensure rustup's Rust is on PATH (run_logged subshell doesn't inherit it)
-if [[ -f "$HOME/.cargo/env" ]]; then
-  source "$HOME/.cargo/env"
-elif ! command -v rustc &>/dev/null; then
-  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path
-  source "$HOME/.cargo/env"
-fi
+# Rust installed by packaging/rustup.sh — set PATH for this subshell
 export PATH="$HOME/.cargo/bin:$PATH"
 
 BUILD_DIR=$(mktemp -d)

@@ -80,8 +80,7 @@ python3-poetry
 qt5-style-kvantum
 ripgrep
 ruby
-rustc
-cargo
+# rustc and cargo installed via rustup (Ubuntu's 1.75 is too old for SwayOSD)
 slurp
 starship
 sushi

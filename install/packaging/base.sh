@@ -15,7 +15,8 @@ for pkg in "${flatpak_packages[@]}"; do
   flatpak install -y flathub "$pkg" || true
 done
 
-# Install cargo packages
+# Install cargo packages (rustup installed by packaging/rustup.sh)
+export PATH="$HOME/.cargo/bin:$PATH"
 if command -v cargo &>/dev/null; then
   mapfile -t cargo_packages < <(grep -v '^#' "$OMUNTU_INSTALL/packages/cargo.packages" | grep -v '^$')
   for pkg in "${cargo_packages[@]}"; do

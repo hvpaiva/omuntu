@@ -52,7 +52,13 @@ cd SwayOSD
 # SwayOSD requires Rust nightly (rust-toolchain.toml)
 # Install it explicitly — rustup auto-install fails under run_logged (stdin=/dev/null)
 rustup toolchain install nightly
-echo "Using rustc: $(rustc --version)"
+
+# Use the actual rustc binary, not the rustup proxy — the proxy fails
+# inside meson's env-wrapped subprocesses (CARGO_HOME override confuses it)
+export RUSTC="$(rustup which rustc)"
+export CARGO="$(rustup which cargo)"
+echo "Using rustc: $RUSTC ($($RUSTC --version))"
+
 meson setup build --prefix=/usr --buildtype release
 meson compile -C build
 sudo meson install -C build

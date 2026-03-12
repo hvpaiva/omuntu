@@ -13,6 +13,7 @@ echo "Building SwayOSD from source..."
 
 # All build dependencies
 sudo apt-get install -y \
+  meson ninja-build pkg-config \
   sassc \
   libgtk-4-dev libpulse-dev libinput-dev \
   libevdev-dev libudev-dev libdbus-1-dev \

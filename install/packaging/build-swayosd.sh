@@ -21,8 +21,16 @@ sudo apt-get install -y \
   gobject-introspection libgirepository1.0-dev \
   gtk-doc-tools valac
 
-# Rust installed by packaging/rustup.sh — set PATH for this subshell
+# Rust installed by packaging/rustup.sh — set PATH and explicit paths for meson/cargo
 export PATH="$HOME/.cargo/bin:$PATH"
+export RUSTC="$HOME/.cargo/bin/rustc"
+export CARGO="$HOME/.cargo/bin/cargo"
+
+if ! command -v rustc &>/dev/null; then
+  echo "ERROR: rustc not found. Run packaging/rustup.sh first."
+  exit 1
+fi
+echo "Using rustc: $(which rustc) — $(rustc --version)"
 
 BUILD_DIR=$(mktemp -d)
 cd "$BUILD_DIR"

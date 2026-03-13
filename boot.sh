@@ -19,7 +19,7 @@ echo -e "\n$ansi_art\n"
 # Use custom branch if instructed, otherwise default to dev
 OMUNTU_REF="${OMUNTU_REF:-dev}"
 
-sudo apt-get update && sudo apt-get install -y git curl software-properties-common
+sudo apt-get update; sudo apt-get install -y git curl software-properties-common
 
 # Use custom repo if specified, otherwise default to hvpaiva/omuntu
 OMUNTU_REPO="${OMUNTU_REPO:-hvpaiva/omuntu}"

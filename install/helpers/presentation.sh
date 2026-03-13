@@ -5,7 +5,9 @@ if ! command -v gum &>/dev/null; then
     sudo mkdir -p /etc/apt/keyrings
     curl -fsSL https://repo.charm.sh/apt/gpg.key | sudo gpg --batch --yes --dearmor -o /etc/apt/keyrings/charm.gpg
     echo "deb [signed-by=/etc/apt/keyrings/charm.gpg] https://repo.charm.sh/apt/ * *" | sudo tee /etc/apt/sources.list.d/charm.list
-    sudo apt-get update
+    # apt-get update exits non-zero if any index file fails (e.g. AppStream
+    # metadata), even when Packages lists succeed.
+    sudo apt-get update || true
   fi
   omarchy-pkg-add gum
 fi

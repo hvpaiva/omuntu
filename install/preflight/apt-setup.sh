@@ -16,5 +16,8 @@ if [[ -n ${OMUNTU_ONLINE_INSTALL:-} ]]; then
   fi
 
   # Update package lists after adding all repos
-  sudo apt-get update
+  # apt-get update exits non-zero if any index file fails (e.g. AppStream
+  # metadata), even when Packages lists succeed. apt-get install still
+  # fails loudly if packages are unavailable.
+  sudo apt-get update || true
 fi

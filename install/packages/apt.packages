@@ -24,7 +24,6 @@ cups-pdf
 docker.io
 docker-buildx
 docker-compose-v2
-dotnet-runtime-9.0
 evince
 exfatprogs
 eza
@@ -68,10 +67,9 @@ fonts-noto-color-emoji
 libnss-mdns
 obs-studio
 pamixer
-pinta
 playerctl
 plocate
-polkit-gnome
+policykit-1-gnome
 libpq-dev
 power-profiles-daemon
 python3-gi
@@ -81,7 +79,7 @@ ripgrep
 ruby
 # rustc and cargo installed via rustup (Ubuntu's 1.75 is too old for SwayOSD)
 slurp
-sushi
+gnome-sushi
 swaybg
 system-config-printer
 tldr

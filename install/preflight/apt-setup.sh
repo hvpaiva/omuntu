@@ -18,12 +18,11 @@ if [[ -n ${OMUNTU_ONLINE_INSTALL:-} ]]; then
     echo "deb [signed-by=/etc/apt/keyrings/charm.gpg] https://repo.charm.sh/apt/ * *" | sudo tee /etc/apt/sources.list.d/charm.list
   fi
 
-  # Add Microsoft package feed (.NET runtime)
-  if [ ! -f /etc/apt/sources.list.d/microsoft-prod.list ]; then
-    curl -fsSL https://packages.microsoft.com/config/ubuntu/24.04/packages-microsoft-prod.deb -o /tmp/packages-microsoft-prod.deb
-    sudo dpkg -i /tmp/packages-microsoft-prod.deb
-    rm -f /tmp/packages-microsoft-prod.deb
-  fi
+  # Add .NET backports PPA (.NET 9 is not in Ubuntu 24.04 default repos)
+  sudo add-apt-repository -y ppa:dotnet/backports
+
+  # Add pinta PPA (pinta is not in Ubuntu 24.04 default repos)
+  sudo add-apt-repository -y ppa:pinta-maintainers/pinta-stable
 
   # Update package lists after adding all repos
   # apt-get update exits non-zero if any index file fails (e.g. AppStream

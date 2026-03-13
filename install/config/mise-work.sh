@@ -2,6 +2,9 @@
 mkdir -p "$HOME/Work"
 mkdir -p "$HOME/Work/tries"
 
+# mise installed by packaging/mise.sh to ~/.local/bin
+export PATH="$HOME/.local/bin:$PATH"
+
 # Add ./bin to path for all items in ~/Work
 cat >"$HOME/Work/.mise.toml" <<'EOF'
 [env]

@@ -10,6 +10,7 @@ alsa-utils
 avahi-daemon
 bash-completion
 bat
+bluez
 bolt
 brightnessctl
 btop

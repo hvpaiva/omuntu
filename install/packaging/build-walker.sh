@@ -10,11 +10,16 @@ set -e
 
 echo "Building Walker from source..."
 
-# Build dependencies
+# Build dependencies (gdk-pixbuf, pango, graphene are transitive via libgtk-4-dev)
 sudo apt-get install -y \
-  pkg-config \
-  libgtk-4-dev libcairo2-dev libpoppler-glib-dev \
-  libglib2.0-dev gobject-introspection libgirepository1.0-dev
+  pkg-config protobuf-compiler \
+  libgtk-4-dev libcairo2-dev libpoppler-glib-dev libglib2.0-dev
+
+# gtk4-layer-shell is built from source by build-swayosd.sh (not in Ubuntu 24.04 repos)
+if ! pkg-config --exists gtk4-layer-shell-0; then
+  echo "ERROR: gtk4-layer-shell not found. Run packaging/build-swayosd.sh first."
+  exit 1
+fi
 
 # Rust installed by packaging/rustup.sh
 export PATH="$HOME/.cargo/bin:$PATH"

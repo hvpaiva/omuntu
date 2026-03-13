@@ -8,11 +8,21 @@ if [[ -n ${OMUNTU_ONLINE_INSTALL:-} ]]; then
   # Add Ghostty PPA
   sudo add-apt-repository -y ppa:mkasberg/ghostty-ubuntu
 
+  # Add fastfetch PPA
+  sudo add-apt-repository -y ppa:zhangsongcui3371/fastfetch
+
   # Add Charm repo (gum) — may already exist from presentation.sh
   if [ ! -f /etc/apt/sources.list.d/charm.list ]; then
     sudo mkdir -p /etc/apt/keyrings
     curl -fsSL https://repo.charm.sh/apt/gpg.key | sudo gpg --batch --yes --dearmor -o /etc/apt/keyrings/charm.gpg
     echo "deb [signed-by=/etc/apt/keyrings/charm.gpg] https://repo.charm.sh/apt/ * *" | sudo tee /etc/apt/sources.list.d/charm.list
+  fi
+
+  # Add Microsoft package feed (.NET runtime)
+  if [ ! -f /etc/apt/sources.list.d/microsoft-prod.list ]; then
+    curl -fsSL https://packages.microsoft.com/config/ubuntu/24.04/packages-microsoft-prod.deb -o /tmp/packages-microsoft-prod.deb
+    sudo dpkg -i /tmp/packages-microsoft-prod.deb
+    rm -f /tmp/packages-microsoft-prod.deb
   fi
 
   # Update package lists after adding all repos

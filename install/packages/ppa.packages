@@ -8,3 +8,5 @@ xdg-desktop-portal-hyprland
 xdg-terminal-exec
 # From ppa:mkasberg/ghostty-ubuntu
 ghostty
+# From ppa:zhangsongcui3371/fastfetch
+fastfetch

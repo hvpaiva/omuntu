@@ -28,7 +28,6 @@ dotnet-runtime-9.0
 evince
 exfatprogs
 eza
-fastfetch
 fcitx5
 fcitx5-frontend-gtk3
 fcitx5-frontend-qt5
@@ -49,7 +48,6 @@ inetutils-telnet
 inxi
 jq
 kdenlive
-lazygit
 less
 libsecret-tools
 libyaml-dev
@@ -83,7 +81,6 @@ ripgrep
 ruby
 # rustc and cargo installed via rustup (Ubuntu's 1.75 is too old for SwayOSD)
 slurp
-starship
 sushi
 swaybg
 system-config-printer

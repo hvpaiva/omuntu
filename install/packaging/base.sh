@@ -1,3 +1,5 @@
+set -eEo pipefail
+
 # Install all apt packages
 mapfile -t apt_packages < <(grep -v '^#' "$OMUNTU_INSTALL/packages/apt.packages" | grep -v '^$')
 omarchy-pkg-add "${apt_packages[@]}"

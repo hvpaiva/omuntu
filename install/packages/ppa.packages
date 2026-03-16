@@ -12,5 +12,3 @@ ghostty
 fastfetch
 # From ppa:dotnet/backports
 dotnet-runtime-9.0
-# From ppa:pinta-maintainers/pinta-stable
-pinta

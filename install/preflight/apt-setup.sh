@@ -21,9 +21,6 @@ if [[ -n ${OMUNTU_ONLINE_INSTALL:-} ]]; then
   # Add .NET backports PPA (.NET 9 is not in Ubuntu 24.04 default repos)
   sudo add-apt-repository -y ppa:dotnet/backports
 
-  # Add pinta PPA (pinta is not in Ubuntu 24.04 default repos)
-  sudo add-apt-repository -y ppa:pinta-maintainers/pinta-stable
-
   # Update package lists after adding all repos
   # apt-get update exits non-zero if any index file fails (e.g. AppStream
   # metadata), even when Packages lists succeed. apt-get install still

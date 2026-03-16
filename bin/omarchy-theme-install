@@ -14,7 +14,7 @@ if [[ -z $REPO_URL ]]; then
   exit 1
 fi
 
-THEMES_DIR="$HOME/.config/omarchy/themes"
+THEMES_DIR="$HOME/.config/omuntu/themes"
 THEME_NAME=$(basename "$REPO_URL" .git | sed -E 's/^omarchy-//; s/-theme$//')
 THEME_PATH="$THEMES_DIR/$THEME_NAME"
 
@@ -23,7 +23,7 @@ if [[ -d $THEME_PATH ]]; then
   rm -rf "$THEME_PATH"
 fi
 
-# Clone the repo directly to ~/.config/omarchy/themes
+# Clone the repo directly to ~/.config/omuntu/themes
 if ! git clone "$REPO_URL" "$THEME_PATH"; then
   echo "Error: Failed to clone theme repo."
   exit 1

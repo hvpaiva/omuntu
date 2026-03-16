@@ -2,7 +2,7 @@
 
 # Sync Omuntu theme to all Obsidian vaults
 
-CURRENT_THEME_DIR="$HOME/.config/omarchy/current/theme"
+CURRENT_THEME_DIR="$HOME/.config/omuntu/current/theme"
 
 [[ -f $CURRENT_THEME_DIR/obsidian.css ]] || exit 0
 

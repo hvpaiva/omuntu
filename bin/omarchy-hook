@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Run a named hook, like post-update (available in ~/.config/omarchy/hooks/post-update).
+# Run a named hook, like post-update (available in ~/.config/omuntu/hooks/post-update).
 
 set -e
 
@@ -10,7 +10,7 @@ if (( $# < 1 )); then
 fi
 
 HOOK=$1
-HOOK_PATH="$HOME/.config/omarchy/hooks/$1"
+HOOK_PATH="$HOME/.config/omuntu/hooks/$1"
 shift
 
 if [[ -f $HOOK_PATH ]]; then

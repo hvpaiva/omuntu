@@ -195,8 +195,8 @@ show_style_menu() {
   *Font*) show_font_menu ;;
   *Background*) show_background_menu ;;
   *Hyprland*) open_in_editor ~/.config/hypr/looknfeel.conf ;;
-  *Screensaver*) open_in_editor ~/.config/omarchy/branding/screensaver.txt ;;
-  *About*) open_in_editor ~/.config/omarchy/branding/about.txt ;;
+  *Screensaver*) open_in_editor ~/.config/omuntu/branding/screensaver.txt ;;
+  *About*) open_in_editor ~/.config/omuntu/branding/about.txt ;;
   *) show_main_menu ;;
   esac
 }
@@ -614,7 +614,7 @@ go_to_menu() {
 }
 
 # Allow user extensions and overrides
-USER_EXTENSIONS="$HOME/.config/omarchy/extensions/menu.sh"
+USER_EXTENSIONS="$HOME/.config/omuntu/extensions/menu.sh"
 [[ -f $USER_EXTENSIONS ]] && source "$USER_EXTENSIONS"
 
 toggle_existing_menu

@@ -1,7 +1,7 @@
-if omarchy-battery-present; then
+if omuntu-battery-present; then
   cat <<EOF | sudo tee "/etc/udev/rules.d/99-wifi-powersave.rules"
-SUBSYSTEM=="power_supply", ATTR{type}=="Mains", ATTR{online}=="0", RUN+="$HOME/.local/share/omuntu/bin/omarchy-wifi-powersave on"
-SUBSYSTEM=="power_supply", ATTR{type}=="Mains", ATTR{online}=="1", RUN+="$HOME/.local/share/omuntu/bin/omarchy-wifi-powersave off"
+SUBSYSTEM=="power_supply", ATTR{type}=="Mains", ATTR{online}=="0", RUN+="$HOME/.local/share/omuntu/bin/omuntu-wifi-powersave on"
+SUBSYSTEM=="power_supply", ATTR{type}=="Mains", ATTR{online}=="1", RUN+="$HOME/.local/share/omuntu/bin/omuntu-wifi-powersave off"
 EOF
 
   sudo udevadm control --reload

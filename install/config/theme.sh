@@ -6,7 +6,7 @@ sudo ln -snf /usr/share/icons/Adwaita/symbolic/actions/go-next-symbolic.svg /usr
 mkdir -p ~/.config/omuntu/themes
 
 # Set initial theme
-omarchy-theme-set "Tokyo Night"
+omuntu-theme-set "Tokyo Night"
 rm -rf ~/.config/chromium/SingletonLock # remove stale lock if present
 
 # Set specific app links for current theme

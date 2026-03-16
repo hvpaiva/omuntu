@@ -9,7 +9,7 @@ if ! command -v gum &>/dev/null; then
     # metadata), even when Packages lists succeed.
     sudo apt-get update || true
   fi
-  omarchy-pkg-add gum
+  omuntu-pkg-add gum
 fi
 
 # Get terminal size from /dev/tty (works in all scenarios: direct, sourced, or piped)

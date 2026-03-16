@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Snapshots are not supported on Ubuntu (out of scope)
+# This is a stub to prevent errors from scripts that call omuntu-snapshot
+
+COMMAND="$1"
+
+case "$COMMAND" in
+create)
+  echo "Snapshots not available on Omuntu"
+  ;;
+restore)
+  echo "Snapshots not available on Omuntu"
+  ;;
+*)
+  echo "Usage: omuntu-snapshot <create|restore>" >&2
+  exit 1
+  ;;
+esac
+
+exit 0

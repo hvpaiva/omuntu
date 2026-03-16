@@ -9,7 +9,7 @@
 
 # Command Naming
 
-All commands start with `omarchy-`. Prefixes indicate purpose:
+All commands start with `omuntu-`. Prefixes indicate purpose:
 
 - `cmd-` - check if commands exist, misc utility commands
 - `pkg-` - package management helpers
@@ -27,10 +27,10 @@ All commands start with `omarchy-`. Prefixes indicate purpose:
 
 Use these instead of raw shell commands:
 
-- `omarchy-cmd-missing` / `omarchy-cmd-present` - check for commands
-- `omarchy-pkg-missing` / `omarchy-pkg-present` - check for packages
-- `omarchy-pkg-add` - install packages (handles apt and Flatpak)
-- `omarchy-hw-asus-rog` - detect ASUS ROG hardware (and similar `hw-*` commands)
+- `omuntu-cmd-missing` / `omuntu-cmd-present` - check for commands
+- `omuntu-pkg-missing` / `omuntu-pkg-present` - check for packages
+- `omuntu-pkg-add` - install packages (handles apt and Flatpak)
+- `omuntu-hw-asus-rog` - detect ASUS ROG hardware (and similar `hw-*` commands)
 
 # Config Structure
 
@@ -43,14 +43,14 @@ Use these instead of raw shell commands:
 To copy a default config to user config with automatic backup:
 
 ```bash
-omarchy-refresh-config hypr/hyprlock.conf
+omuntu-refresh-config hypr/hyprlock.conf
 ```
 
 This copies `~/.local/share/omuntu/config/hypr/hyprlock.conf` to `~/.config/hypr/hyprlock.conf`.
 
 # Migrations
 
-To create a new migration, run `omarchy-dev-add-migration --no-edit`. This creates a migration file named after the unix timestamp of the last commit.
+To create a new migration, run `omuntu-dev-add-migration --no-edit`. This creates a migration file named after the unix timestamp of the last commit.
 
 Migration format:
 - No shebang line
@@ -61,7 +61,7 @@ Example:
 ```bash
 echo "Disable fingerprint in hyprlock if fingerprint auth is not configured"
 
-if omarchy-cmd-missing fprintd-list || ! fprintd-list "$USER" 2>/dev/null | grep -q "finger"; then
+if omuntu-cmd-missing fprintd-list || ! fprintd-list "$USER" 2>/dev/null | grep -q "finger"; then
   sed -i 's/fingerprint:enabled = .*/fingerprint:enabled = false/' ~/.config/hypr/hyprlock.conf
 fi
 ```

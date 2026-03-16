@@ -11,7 +11,7 @@ cp $OMUNTU_PATH/default/walker/restart.conf ~/.config/systemd/user/app-walker@au
 # Create apt hook to restart walker after updates
 sudo mkdir -p /etc/apt/apt.conf.d
 sudo tee /etc/apt/apt.conf.d/99-walker-restart > /dev/null << EOF
-DPkg::Post-Invoke { "if [ -x $OMUNTU_PATH/bin/omarchy-restart-walker ]; then $OMUNTU_PATH/bin/omarchy-restart-walker || true; fi"; };
+DPkg::Post-Invoke { "if [ -x $OMUNTU_PATH/bin/omuntu-restart-walker ]; then $OMUNTU_PATH/bin/omuntu-restart-walker || true; fi"; };
 EOF
 
 # Link the visual theme menu config

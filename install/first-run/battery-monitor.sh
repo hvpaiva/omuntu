@@ -1,4 +1,4 @@
-if omarchy-battery-present; then
+if omuntu-battery-present; then
   powerprofilesctl set balanced || true
 
   # Enable battery monitoring timer for low battery notifications

@@ -1,4 +1,4 @@
 set -eEo pipefail
 
 # Includes lazyvim and the themes
-omarchy-nvim-setup
+omuntu-nvim-setup

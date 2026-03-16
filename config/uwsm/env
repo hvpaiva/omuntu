@@ -8,4 +8,4 @@ export PATH=$OMUNTU_PATH/bin:$PATH
 source ~/.config/uwsm/default
 
 # Activate mise if present on the system
-omarchy-cmd-present mise && eval "$(mise activate bash --shims)"
+omuntu-cmd-present mise && eval "$(mise activate bash --shims)"

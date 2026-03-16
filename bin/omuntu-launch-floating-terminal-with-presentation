@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Launch a floating terminal with the Omuntu logo presentation, then execute the command passed in, and finally end with the omuntu-show-done presentation.
+# Used by actions such as Update System.
+
+cmd="$*"
+exec setsid uwsm-app -- xdg-terminal-exec --app-id=org.omuntu.terminal --title=Omuntu -e bash -c "omuntu-show-logo; $cmd; if (( \$? != 130 )); then omuntu-show-done; fi"

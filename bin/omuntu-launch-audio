@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Launch the Omuntu audio controls TUI (provided by wiremix).
+
+omuntu-launch-or-focus-tui wiremix

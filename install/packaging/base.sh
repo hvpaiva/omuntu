@@ -2,11 +2,11 @@ set -eEo pipefail
 
 # Install all apt packages
 mapfile -t apt_packages < <(grep -v '^#' "$OMUNTU_INSTALL/packages/apt.packages" | grep -v '^$')
-omarchy-pkg-add "${apt_packages[@]}"
+omuntu-pkg-add "${apt_packages[@]}"
 
 # Install PPA packages
 mapfile -t ppa_packages < <(grep -v '^#' "$OMUNTU_INSTALL/packages/ppa.packages" | grep -v '^$')
-omarchy-pkg-add "${ppa_packages[@]}"
+omuntu-pkg-add "${ppa_packages[@]}"
 
 # Setup Flathub remote (flatpak itself is in apt.packages)
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo || true

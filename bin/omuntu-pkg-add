@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Add the named packages to the system if they're missing. Returns false if it couldn't be done.
+
+if omuntu-pkg-missing "$@"; then
+  sudo apt-get install -y "$@" || exit 1
+fi
+
+for pkg in "$@"; do
+  if ! dpkg -l "$pkg" 2>/dev/null | grep -q '^ii'; then
+    echo -e "\033[31mError: Package '$pkg' did not install\033[0m" >&2
+    exit 1
+  fi
+done
+
+exit 0

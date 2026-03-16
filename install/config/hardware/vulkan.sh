@@ -14,5 +14,5 @@ fi
 if (( ${#PACKAGES[@]} > 0 )); then
   # Remove duplicates
   mapfile -t PACKAGES < <(printf '%s\n' "${PACKAGES[@]}" | sort -u)
-  omarchy-pkg-add "${PACKAGES[@]}"
+  omuntu-pkg-add "${PACKAGES[@]}"
 fi

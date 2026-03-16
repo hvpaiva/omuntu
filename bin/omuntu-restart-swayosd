@@ -1,0 +1,3 @@
+#!/bin/bash
+
+omuntu-restart-app swayosd-server

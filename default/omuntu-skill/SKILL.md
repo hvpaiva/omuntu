@@ -8,7 +8,7 @@ description: >
   monitors, gaps, borders, blur, opacity, waybar, walker, terminal config, themes,
   wallpaper, night light, idle, lock screen, screenshots, layer rules, workspace
   settings, display config, and user-facing omuntu commands. Excludes Omuntu
-  source development in ~/.local/share/omuntu/ and omarchy-dev-* workflows.
+  source development in ~/.local/share/omuntu/ and omuntu-dev-* workflows.
 ---
 
 # Omuntu Skill
@@ -29,19 +29,19 @@ It is not for contributing to Omuntu source code.
 - Window behavior, animations, opacity, blur, gaps, borders
 - Layer rules, workspace settings, display/monitor configuration
 - Themes, wallpapers, fonts, appearance changes
-- User-facing `omarchy-*` commands (`omarchy-theme-*`, `omarchy-refresh-*`, `omarchy-restart-*`, etc.)
+- User-facing `omuntu-*` commands (`omuntu-theme-*`, `omuntu-refresh-*`, `omuntu-restart-*`, etc.)
 - Screenshots, screen recording, night light, idle behavior, lock screen
 
 **If you're about to edit a config file in ~/.config/ on this system, STOP and use this skill first.**
 
-**Do NOT use this skill for Omuntu development tasks** (editing files in `~/.local/share/omuntu/`, creating migrations, or running `omarchy-dev-*` workflows).
+**Do NOT use this skill for Omuntu development tasks** (editing files in `~/.local/share/omuntu/`, creating migrations, or running `omuntu-dev-*` workflows).
 
 ## Critical Safety Rules
 
 **For end-user customization tasks, NEVER modify anything in `~/.local/share/omuntu/`** - but READING is safe and encouraged.
 
 This directory contains Omuntu's source files managed by git. Any changes will be:
-- Lost on next `omarchy-update`
+- Lost on next `omuntu-update`
 - Cause conflicts with upstream
 - Break the system's update mechanism
 
@@ -56,7 +56,7 @@ This directory contains Omuntu's source files managed by git. Any changes will b
 ```
 
 **Reading `~/.local/share/omuntu/` is SAFE and useful** - do it freely to:
-- Understand how omuntu commands work: `cat $(which omarchy-theme-set)`
+- Understand how omuntu commands work: `cat $(which omuntu-theme-set)`
 - See default configs before customizing: `cat ~/.local/share/omuntu/config/waybar/config.jsonc`
 - Check stock theme files to copy for customization
 - Reference default hyprland settings: `cat ~/.local/share/omuntu/default/hypr/*`
@@ -84,34 +84,34 @@ Omuntu is built on:
 
 ## Command Discovery
 
-Omuntu provides ~145 commands following `omarchy-<category>-<action>` pattern.
+Omuntu provides ~145 commands following `omuntu-<category>-<action>` pattern.
 
 ```bash
 # List all omuntu commands
-compgen -c | grep -E '^omarchy-' | sort -u
+compgen -c | grep -E '^omuntu-' | sort -u
 
 # Find commands by category
-compgen -c | grep -E '^omarchy-theme'
-compgen -c | grep -E '^omarchy-restart'
+compgen -c | grep -E '^omuntu-theme'
+compgen -c | grep -E '^omuntu-restart'
 
 # Read a command's source to understand it
-cat $(which omarchy-theme-set)
+cat $(which omuntu-theme-set)
 ```
 
 ### Command Categories
 
 | Prefix | Purpose | Example |
 |--------|---------|---------|
-| `omarchy-refresh-*` | Reset config to defaults (backs up first) | `omarchy-refresh-waybar` |
-| `omarchy-restart-*` | Restart a service/app | `omarchy-restart-waybar` |
-| `omarchy-toggle-*` | Toggle feature on/off | `omarchy-toggle-nightlight` |
-| `omarchy-theme-*` | Theme management | `omarchy-theme-set <name>` |
-| `omarchy-install-*` | Install optional software | `omarchy-install-docker-dbs` |
-| `omarchy-launch-*` | Launch apps | `omarchy-launch-browser` |
-| `omarchy-cmd-*` | System commands | `omarchy-cmd-screenshot` |
-| `omarchy-pkg-*` | Package management | `omarchy-pkg-install <pkg>` |
-| `omarchy-setup-*` | Initial setup tasks | `omarchy-setup-fingerprint` |
-| `omarchy-update-*` | System updates | `omarchy-update` |
+| `omuntu-refresh-*` | Reset config to defaults (backs up first) | `omuntu-refresh-waybar` |
+| `omuntu-restart-*` | Restart a service/app | `omuntu-restart-waybar` |
+| `omuntu-toggle-*` | Toggle feature on/off | `omuntu-toggle-nightlight` |
+| `omuntu-theme-*` | Theme management | `omuntu-theme-set <name>` |
+| `omuntu-install-*` | Install optional software | `omuntu-install-docker-dbs` |
+| `omuntu-launch-*` | Launch apps | `omuntu-launch-browser` |
+| `omuntu-cmd-*` | System commands | `omuntu-cmd-screenshot` |
+| `omuntu-pkg-*` | Package management | `omuntu-pkg-install <pkg>` |
+| `omuntu-setup-*` | Initial setup tasks | `omuntu-setup-fingerprint` |
+| `omuntu-update-*` | System updates | `omuntu-update` |
 
 ## Configuration Locations
 
@@ -134,7 +134,7 @@ cat $(which omarchy-theme-set)
 **Key behaviors:**
 - Hyprland auto-reloads on config save (no restart needed for most changes)
 - Use `hyprctl reload` to force reload
-- Use `omarchy-refresh-hyprland` to reset to defaults
+- Use `omuntu-refresh-hyprland` to reset to defaults
 
 ### Waybar (Status Bar)
 
@@ -144,9 +144,9 @@ cat $(which omarchy-theme-set)
 └── style.css          # Styling
 ```
 
-**Waybar does NOT auto-reload.** You MUST run `omarchy-restart-waybar` after any config changes.
+**Waybar does NOT auto-reload.** You MUST run `omuntu-restart-waybar` after any config changes.
 
-**Commands:** `omarchy-restart-waybar`, `omarchy-refresh-waybar`, `omarchy-toggle-waybar`
+**Commands:** `omuntu-restart-waybar`, `omuntu-refresh-waybar`, `omuntu-toggle-waybar`
 
 ### Terminals
 
@@ -156,7 +156,7 @@ cat $(which omarchy-theme-set)
 ~/.config/ghostty/config
 ```
 
-**Command:** `omarchy-restart-terminal`
+**Command:** `omuntu-restart-terminal`
 
 ### Other Configs
 
@@ -186,9 +186,9 @@ cp ~/.config/hypr/bindings.conf ~/.config/hypr/bindings.conf.bak.$(date +%s)
 
 # 4. Apply changes
 # - Hyprland: auto-reloads on save (no restart needed)
-# - Waybar: MUST restart with omarchy-restart-waybar
-# - Walker: MUST restart with omarchy-restart-walker
-# - Terminals: MUST restart with omarchy-restart-terminal
+# - Waybar: MUST restart with omuntu-restart-waybar
+# - Walker: MUST restart with omuntu-restart-walker
+# - Terminals: MUST restart with omuntu-restart-terminal
 ```
 
 ### Pattern 2: Make a new theme
@@ -196,7 +196,7 @@ cp ~/.config/hypr/bindings.conf ~/.config/hypr/bindings.conf.bak.$(date +%s)
 1. Create a directory under ~/.config/omuntu/themes.
 2. See how an existing theme is done via ~/.local/share/omuntu/themes/catppuccin.
 3. Download a matching background (or several) from the internet and put them in ~/.config/omuntu/themes/[name-of-new-theme]
-4. When done with the theme, run omarchy-theme-set "Name of new theme"
+4. When done with the theme, run omuntu-theme-set "Name of new theme"
 
 ### Pattern 3: Use Hooks for Automation
 
@@ -207,7 +207,7 @@ Create scripts in `~/.config/omuntu/hooks/` to run automatically on events:
 ~/.config/omuntu/hooks/
 ├── theme-set        # Runs after theme change (receives theme name as $1)
 ├── font-set         # Runs after font change
-└── post-update      # Runs after omarchy-update
+└── post-update      # Runs after omuntu-update
 ```
 
 Example hook (`~/.config/omuntu/hooks/theme-set`):
@@ -224,8 +224,8 @@ When customizations go wrong:
 
 ```bash
 # Reset specific config (creates backup automatically)
-omarchy-refresh-waybar
-omarchy-refresh-hyprland
+omuntu-refresh-waybar
+omuntu-refresh-hyprland
 
 # The refresh command:
 # 1. Backs up current config with timestamp
@@ -238,12 +238,12 @@ omarchy-refresh-hyprland
 ### Themes
 
 ```bash
-omarchy-theme-list              # Show available themes
-omarchy-theme-current           # Show current theme
-omarchy-theme-set <name>        # Apply theme (use "Tokyo Night" not "tokyo-night")
-omarchy-theme-next              # Cycle to next theme
-omarchy-theme-bg-next           # Cycle wallpaper
-omarchy-theme-install <url>     # Install from git repo
+omuntu-theme-list              # Show available themes
+omuntu-theme-current           # Show current theme
+omuntu-theme-set <name>        # Apply theme (use "Tokyo Night" not "tokyo-night")
+omuntu-theme-next              # Cycle to next theme
+omuntu-theme-bg-next           # Cycle wallpaper
+omuntu-theme-install <url>     # Install from git repo
 ```
 
 ### Keybindings
@@ -255,11 +255,11 @@ bind = SUPER, Q, killactive
 bind = SUPER SHIFT, E, exit
 ```
 
-View current bindings: `omarchy-menu-keybindings --print`
+View current bindings: `omuntu-menu-keybindings --print`
 
 **IMPORTANT: When re-binding an existing key:**
 
-1. First check existing bindings: `omarchy-menu-keybindings --print`
+1. First check existing bindings: `omuntu-menu-keybindings --print`
 2. If the key is already bound, you MUST add an `unbind` directive BEFORE your new `bind`
 3. Inform the user what the key was previously bound to
 
@@ -297,43 +297,43 @@ Window rules go in `~/.config/hypr/hyprland.conf` or a sourced file. Always veri
 ### Fonts
 
 ```bash
-omarchy-font-list               # Available fonts
-omarchy-font-current            # Current font
-omarchy-font-set <name>         # Change font
+omuntu-font-list               # Available fonts
+omuntu-font-current            # Current font
+omuntu-font-set <name>         # Change font
 ```
 
 ### System
 
 ```bash
-omarchy-update                  # Full system update
-omarchy-version                 # Show Omuntu version
-omarchy-debug --no-sudo --print # Debug info (ALWAYS use these flags)
-omarchy-lock-screen             # Lock screen
-omarchy-system-shutdown         # Shutdown
-omarchy-system-reboot           # Reboot
+omuntu-update                  # Full system update
+omuntu-version                 # Show Omuntu version
+omuntu-debug --no-sudo --print # Debug info (ALWAYS use these flags)
+omuntu-lock-screen             # Lock screen
+omuntu-system-shutdown         # Shutdown
+omuntu-system-reboot           # Reboot
 ```
 
-**IMPORTANT:** Always run `omarchy-debug` with `--no-sudo --print` flags to avoid interactive sudo prompts that will hang the terminal.
+**IMPORTANT:** Always run `omuntu-debug` with `--no-sudo --print` flags to avoid interactive sudo prompts that will hang the terminal.
 
 ## Troubleshooting
 
 ```bash
 # Get debug information (ALWAYS use these flags to avoid interactive prompts)
-omarchy-debug --no-sudo --print
+omuntu-debug --no-sudo --print
 
 # Upload logs for support
-omarchy-upload-log
+omuntu-upload-log
 
 # Reset specific config to defaults
-omarchy-refresh-<app>
+omuntu-refresh-<app>
 
 # Refresh specific config file
 # config-file path is relative to ~/.config/
-# eg. omarchy-refresh-config hypr/hyprlock.conf will refresh ~/.config/hypr/hyprlock.conf
-omarchy-refresh-config <config-file>
+# eg. omuntu-refresh-config hypr/hyprlock.conf will refresh ~/.config/hypr/hyprlock.conf
+omuntu-refresh-config <config-file>
 
 # Full reinstall of configs (nuclear option)
-omarchy-reinstall
+omuntu-reinstall
 ```
 
 ## Decision Framework
@@ -344,7 +344,7 @@ When user requests system changes:
 2. **Is it a config edit?** Edit in `~/.config/`, never `~/.local/share/omuntu/`
 3. **Is it a theme customization?** Create a NEW custom theme directory
 4. **Is it automation?** Use hooks in `~/.config/omuntu/hooks/`
-5. **Is it a package install?** Use `omarchy-pkg-add` (or `omarchy-pkg-aur-add` for AUR-only packages)
+5. **Is it a package install?** Use `omuntu-pkg-add` (or `omuntu-pkg-aur-add` for AUR-only packages)
 6. **Unsure if command exists?** Search with `compgen -c | grep omuntu`
 
 ## Out of Scope
@@ -352,15 +352,15 @@ When user requests system changes:
 This skill intentionally does not cover Omuntu source development. Do not use this skill for:
 - Editing files in `~/.local/share/omuntu/` (`bin/`, `config/`, `default/`, `themes/`, `migrations/`, etc.)
 - Creating or editing migrations
-- Running `omarchy-dev-*` commands
+- Running `omuntu-dev-*` commands
 
 ## Example Requests
 
-- "Change my theme to catppuccin" -> `omarchy-theme-set catppuccin`
+- "Change my theme to catppuccin" -> `omuntu-theme-set catppuccin`
 - "Add a keybinding for Super+E to open file manager" -> Check existing bindings first, add `unbind` if needed, then add `bind` in `~/.config/hypr/bindings.conf`
 - "Configure my external monitor" -> Edit `~/.config/hypr/monitors.conf`
 - "Make the window gaps smaller" -> Edit `~/.config/hypr/looknfeel.conf`
-- "Set up night light to turn on at sunset" -> `omarchy-toggle-nightlight` or edit `~/.config/hypr/hyprsunset.conf`
+- "Set up night light to turn on at sunset" -> `omuntu-toggle-nightlight` or edit `~/.config/hypr/hyprsunset.conf`
 - "Customize the catppuccin theme colors" -> Create `~/.config/omuntu/themes/catppuccin-custom/` by copying from stock, then edit
 - "Run a script every time I change themes" -> Create `~/.config/omuntu/hooks/theme-set`
-- "Reset waybar to defaults" -> `omarchy-refresh-waybar`
+- "Reset waybar to defaults" -> `omuntu-refresh-waybar`

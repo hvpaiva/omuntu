@@ -1,5 +1,5 @@
-if omarchy-battery-present; then
-  mapfile -t profiles < <(omarchy-powerprofiles-list)
+if omuntu-battery-present; then
+  mapfile -t profiles < <(omuntu-powerprofiles-list)
 
   if (( ${#profiles[@]} > 1 )); then
 

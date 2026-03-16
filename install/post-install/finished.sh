@@ -30,7 +30,7 @@ if gum confirm --padding "0 0 0 $((PADDING_LEFT + 32))" --show-help=false --defa
   clear
 
   if [[ -n ${OMUNTU_CHROOT_INSTALL:-} ]]; then
-    touch /var/tmp/omarchy-install-completed
+    touch /var/tmp/omuntu-install-completed
     exit 0
   else
     sudo reboot 2>/dev/null

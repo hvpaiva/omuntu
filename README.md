@@ -57,7 +57,7 @@ After installation, log out and select **Hyprland** in your display manager (GDM
 
 ## Updating
 
-Run `omarchy-update` from the terminal or use the Omuntu Menu > Update > Omuntu.
+Run `omuntu-update` from the terminal or use the Omuntu Menu > Update > Omuntu.
 
 ## License
 

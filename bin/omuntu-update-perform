@@ -1,0 +1,24 @@
+#!/bin/bash
+
+set -e
+
+# Ensure screensaver/sleep doesn't set in during updates
+hyprctl dispatch tagwindow +noidle &>/dev/null || true
+
+# Capture update logs
+export CLICOLOR_FORCE=1
+exec > >(tee "/tmp/omuntu-update.log") 2>&1
+
+# Perform all update steps
+omuntu-update-available-reset
+omuntu-update-system-pkgs
+omuntu-update-aur-pkgs
+omuntu-update-orphan-pkgs
+omuntu-hook post-update
+
+omuntu-update-analyze-logs
+
+omuntu-update-restart
+
+# Re-enable screensaver/sleep after updates
+hyprctl dispatch tagwindow -- -noidle &>/dev/null || true

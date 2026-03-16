@@ -20,7 +20,7 @@ clang
 cups
 cups-browsed
 cups-filters
-cups-pdf
+printer-driver-cups-pdf
 docker.io
 docker-buildx
 docker-compose-v2

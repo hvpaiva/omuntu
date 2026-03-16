@@ -72,6 +72,7 @@ plocate
 policykit-1-gnome
 libpq-dev
 power-profiles-daemon
+pipx
 python3-gi
 python3-poetry
 qt5-style-kvantum

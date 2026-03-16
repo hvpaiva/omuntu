@@ -26,11 +26,14 @@ if command -v cargo &>/dev/null; then
   done
 fi
 
-# Install pip packages
-mapfile -t pip_packages < <(grep -v '^#' "$OMUNTU_INSTALL/packages/pip.packages" | grep -v '^$')
-for pkg in "${pip_packages[@]}"; do
-  pip install --user "$pkg" 2>/dev/null || true
-done
+# Install pip packages via pipx (Ubuntu 24.04 marks system Python as externally
+# managed; pipx installs CLI tools in isolated envs exposed via ~/.local/bin)
+if command -v pipx &>/dev/null; then
+  mapfile -t pip_packages < <(grep -v '^#' "$OMUNTU_INSTALL/packages/pip.packages" | grep -v '^$')
+  for pkg in "${pip_packages[@]}"; do
+    pipx install "$pkg" 2>/dev/null || true
+  done
+fi
 
 # Create symlinks for differently-named binaries
 if command -v fdfind &>/dev/null && ! command -v fd &>/dev/null; then

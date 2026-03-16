@@ -1,12 +1,12 @@
 stop_install_log
 
 echo_in_style() {
-  echo "$1" | tte --canvas-width 0 --anchor-text c --frame-rate 640 print
+  echo "$1" | tte --canvas-width 0 --anchor-text c --frame-rate 640 print || echo "$1"
 }
 
 clear
 echo
-tte -i ~/.local/share/omuntu/logo.txt --canvas-width 0 --anchor-text c --frame-rate 920 laseretch
+tte -i ~/.local/share/omuntu/logo.txt --canvas-width 0 --anchor-text c --frame-rate 920 laseretch || true
 echo
 
 # Display installation time if available

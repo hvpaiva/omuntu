@@ -138,9 +138,11 @@ else
   echo "Defaulted to Tokyo Night theme"
 fi
 
-# Sync plugins headlessly
+# Sync plugins headlessly.
+# TERM=dumb prevents neovim from sending terminal color queries that block
+# when stdout is not a TTY. timeout 300 kills the process if it still hangs.
 echo "Installing neovim plugins (this may take a moment)..."
-if nvim --headless "+Lazy! sync" "+qa!" 2>/dev/null; then
+if TERM=dumb timeout 300 nvim --headless "+Lazy! sync" "+qa!" 2>/dev/null; then
   echo "Neovim setup complete!"
 else
   echo "Plugin sync had issues - they will install on first launch"

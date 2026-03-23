@@ -1,5 +1,8 @@
 # Changes require a restart to take effect.
 
+# Tell Hyprland it was started via a session manager (suppresses the warning)
+export HYPRLAND_CMD=Hyprland
+
 # Ensure Omuntu bins are in the path
 export OMUNTU_PATH=$HOME/.local/share/omuntu
 export PATH=$OMUNTU_PATH/bin:$PATH

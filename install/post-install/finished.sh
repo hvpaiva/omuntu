@@ -1,5 +1,8 @@
 stop_install_log
 
+# pipx installs tte to ~/.local/bin which may not be in PATH yet
+export PATH="$HOME/.local/bin:$PATH"
+
 echo_in_style() {
   echo "$1" | tte --canvas-width 0 --anchor-text c --frame-rate 640 print || echo "$1"
 }

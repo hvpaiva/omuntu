@@ -9,6 +9,7 @@ Comment=An intelligent dynamic tiling Wayland compositor
 Exec=Hyprland
 Type=Application
 DesktopNames=Hyprland
+NoDisplay=true
 EOF
 
 sudo tee /usr/share/wayland-sessions/hyprland-uwsm.desktop > /dev/null <<EOF

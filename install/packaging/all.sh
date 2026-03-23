@@ -9,6 +9,7 @@ run_logged $OMUNTU_INSTALL/packaging/webapps.sh
 run_logged $OMUNTU_INSTALL/packaging/tuis.sh
 run_logged $OMUNTU_INSTALL/packaging/build-swayosd.sh
 run_logged $OMUNTU_INSTALL/packaging/build-walker.sh
+run_logged $OMUNTU_INSTALL/packaging/build-elephant.sh
 run_logged $OMUNTU_INSTALL/packaging/asus-rog.sh
 run_logged $OMUNTU_INSTALL/packaging/framework16.sh
 run_logged $OMUNTU_INSTALL/packaging/surface.sh

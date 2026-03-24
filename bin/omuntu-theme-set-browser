@@ -2,7 +2,9 @@
 
 CHROMIUM_THEME=~/.config/omuntu/current/theme/chromium.theme
 
-if omuntu-cmd-present chromium || omuntu-cmd-present brave; then
+CHROMIUM_BIN=$(command -v chromium-browser 2>/dev/null || command -v chromium 2>/dev/null || echo "")
+
+if [[ -n $CHROMIUM_BIN ]] || omuntu-cmd-present brave; then
   if [[ -f $CHROMIUM_THEME ]]; then
     THEME_RGB_COLOR=$(<$CHROMIUM_THEME)
     THEME_HEX_COLOR=$(printf '#%02x%02x%02x' ${THEME_RGB_COLOR//,/ })
@@ -12,9 +14,9 @@ if omuntu-cmd-present chromium || omuntu-cmd-present brave; then
     THEME_HEX_COLOR="#1c2027"
   fi
 
-  if omuntu-cmd-present chromium; then
+  if [[ -n $CHROMIUM_BIN ]]; then
     echo "{\"BrowserThemeColor\": \"$THEME_HEX_COLOR\"}" | tee "/etc/chromium/policies/managed/color.json" >/dev/null
-    chromium --refresh-platform-policy --no-startup-window >/dev/null
+    "$CHROMIUM_BIN" --refresh-platform-policy --no-startup-window >/dev/null
   fi
 
   if omuntu-cmd-present brave; then

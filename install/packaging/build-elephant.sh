@@ -4,15 +4,27 @@
 set -eEo pipefail
 
 if command -v elephant &>/dev/null; then
-  echo "Elephant already installed: $(elephant --version 2>/dev/null || true)"
+  echo "Elephant already installed"
   exit 0
 fi
 
-echo "Installing Elephant..."
-ELEPHANT_VERSION=$(curl -s "https://api.github.com/repos/abenz1267/elephant/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/')
-curl -Lo /tmp/elephant.tar.gz "https://github.com/abenz1267/elephant/releases/latest/download/elephant_${ELEPHANT_VERSION}_Linux_x86_64.tar.gz"
-tar xf /tmp/elephant.tar.gz -C /tmp elephant
-sudo install -Dm755 /tmp/elephant /usr/local/bin/elephant
-rm -f /tmp/elephant.tar.gz /tmp/elephant
+echo "Building Elephant from source..."
+
+export PATH="$HOME/go/bin:/usr/local/go/bin:$PATH"
+
+if ! command -v go &>/dev/null; then
+  echo "ERROR: go not found. Ensure golang is installed."
+  exit 1
+fi
+
+BUILD_DIR=$(mktemp -d)
+git clone https://github.com/abenz1267/elephant.git "$BUILD_DIR/elephant"
+cd "$BUILD_DIR/elephant"
+
+go build -o elephant ./cmd/elephant.go
+sudo install -Dm755 elephant /usr/local/bin/elephant
+
+cd /
+rm -rf "$BUILD_DIR"
 
 echo "Elephant installed successfully"

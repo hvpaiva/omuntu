@@ -12,6 +12,9 @@ fi
 
 echo "Building Elephant from source..."
 
+# go-sqlite3 uses CGo and requires libsqlite3-dev at build time
+sudo apt-get install -y libsqlite3-dev
+
 # Activate mise shims (mise installed by packaging/mise.sh)
 export PATH="$HOME/.local/bin:$HOME/.local/share/mise/shims:$PATH"
 

@@ -6,6 +6,7 @@ run_logged $OMUNTU_INSTALL/packaging/fonts.sh
 run_logged $OMUNTU_INSTALL/packaging/nvim.sh
 run_logged $OMUNTU_INSTALL/packaging/icons.sh
 run_logged $OMUNTU_INSTALL/packaging/webapps.sh
+run_logged $OMUNTU_INSTALL/packaging/build-lazydocker.sh
 run_logged $OMUNTU_INSTALL/packaging/tuis.sh
 run_logged $OMUNTU_INSTALL/packaging/build-swayosd.sh
 run_logged $OMUNTU_INSTALL/packaging/build-walker.sh

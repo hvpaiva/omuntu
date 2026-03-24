@@ -15,6 +15,9 @@ bolt
 brightnessctl
 btop
 build-essential
+libnotify-bin
+rfkill
+v4l-utils
 chromium-browser
 clang
 cups

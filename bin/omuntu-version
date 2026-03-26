@@ -1,2 +1,3 @@
 #!/bin/bash
 cat "$OMUNTU_PATH/version"
+echo $unquoted_var

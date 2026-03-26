@@ -6,4 +6,5 @@ cp ~/.local/share/omuntu/config/omuntu.ttf ~/.local/share/fonts/
 fc-cache
 
 # Install Nerd Fonts (JetBrainsMono, iAWriter)
-source $OMUNTU_INSTALL/packaging/install-nerd-fonts.sh
+# shellcheck source=install/packaging/install-nerd-fonts.sh
+source "$OMUNTU_INSTALL/packaging/install-nerd-fonts.sh"

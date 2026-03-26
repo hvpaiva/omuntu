@@ -14,4 +14,4 @@ if [[ ! -x "$HOME/.local/bin/mise" ]]; then
   echo "ERROR: mise installer completed but binary not found at ~/.local/bin/mise"
   exit 1
 fi
-echo "Installed: $($HOME/.local/bin/mise --version)"
+echo "Installed: $("$HOME/.local/bin/mise" --version)"

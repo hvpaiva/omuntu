@@ -6,6 +6,7 @@ abort() {
 
 # Must be Ubuntu 24.04+
 if [[ -f /etc/os-release ]]; then
+  # shellcheck source=/dev/null  # System file, not available during static analysis
   source /etc/os-release
   if [[ "$ID" != "ubuntu" ]]; then
     abort "Ubuntu 24.04+"

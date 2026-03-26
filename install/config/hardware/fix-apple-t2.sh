@@ -12,7 +12,7 @@ if lspci -nn | grep -q "106b:180[12]"; then
     tiny-dfr
 
   # Add user to video group (required for tiny-dfr to access /dev/dri devices)
-  sudo usermod -aG video ${USER}
+  sudo usermod -aG video "${USER}"
 
   # Enable T2 services
   sudo systemctl enable t2fanrd.service

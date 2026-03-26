@@ -60,7 +60,8 @@ tdlm() {
       tmux send-keys -t "$TMUX_PANE" "cd '$dirpath' && tdl $ai $ai2" C-m
       first=false
     else
-      local pane_id=$(tmux new-window -c "$dirpath" -P -F '#{pane_id}')
+      local pane_id
+      pane_id=$(tmux new-window -c "$dirpath" -P -F '#{pane_id}')
       tmux send-keys -t "$pane_id" "tdl $ai $ai2" C-m
     fi
   done

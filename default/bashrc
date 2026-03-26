@@ -3,6 +3,7 @@
 
 # All the default Omuntu aliases and functions
 # (don't mess with these directly, just overwrite them here!)
+# shellcheck source=default/bash/rc
 source ~/.local/share/omuntu/default/bash/rc
 
 # Add your own exports, aliases, and functions here.

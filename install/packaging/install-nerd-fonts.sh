@@ -14,7 +14,8 @@ install_nerd_font() {
   fi
 
   echo "Installing $font_name Nerd Font..."
-  local tmp_dir=$(mktemp -d)
+  local tmp_dir
+  tmp_dir=$(mktemp -d)
   local url="https://github.com/ryanoasis/nerd-fonts/releases/latest/download/${font_name}.tar.xz"
 
   if curl -sL "$url" -o "$tmp_dir/${font_name}.tar.xz"; then

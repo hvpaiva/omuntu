@@ -29,6 +29,8 @@ fi
 export PATH="$HOME/.local/share/mise/shims:$PATH"
 
 BUILD_DIR=$(mktemp -d)
+# Expand BUILD_DIR at trap-set time (intentional) so the temp path is captured
+# shellcheck disable=SC2064
 trap "rm -rf $BUILD_DIR" EXIT
 
 git clone https://github.com/abenz1267/elephant.git "$BUILD_DIR/elephant"

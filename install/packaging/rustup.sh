@@ -3,7 +3,7 @@
 # This runs before base.sh so cargo packages and source builds use the latest stable Rust
 
 if [[ -x "$HOME/.cargo/bin/rustc" ]]; then
-  echo "Rust already installed: $($HOME/.cargo/bin/rustc --version)"
+  echo "Rust already installed: $("$HOME/.cargo/bin/rustc" --version)"
   exit 0
 fi
 
@@ -14,4 +14,4 @@ if [[ ! -x "$HOME/.cargo/bin/rustc" ]]; then
   echo "ERROR: rustup completed but rustc not found at ~/.cargo/bin/rustc"
   exit 1
 fi
-echo "Installed: $($HOME/.cargo/bin/rustc --version)"
+echo "Installed: $("$HOME/.cargo/bin/rustc" --version)"

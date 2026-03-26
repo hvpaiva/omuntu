@@ -1,0 +1,8 @@
+# All scripts in this repo are Bash. Many install scripts lack shebangs
+# because they are sourced (via `source` or `run_logged`), not executed directly.
+shell=bash
+
+# Allow ShellCheck to follow `source` directives to files outside the
+# checked file set. Required because install scripts source helpers and
+# config scripts source system files.
+external-sources=true

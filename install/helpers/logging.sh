@@ -7,8 +7,8 @@ start_log_output() {
   local ANSI_GRAY="\033[90m"
 
   # Save cursor position and hide cursor
-  printf $ANSI_SAVE_CURSOR
-  printf $ANSI_HIDE_CURSOR
+  printf '%b' "$ANSI_SAVE_CURSOR"
+  printf '%b' "$ANSI_HIDE_CURSOR"
 
   (
     local log_lines=20
@@ -46,8 +46,8 @@ start_log_output() {
 
 stop_log_output() {
   if [[ -n ${monitor_pid:-} ]]; then
-    kill $monitor_pid 2>/dev/null || true
-    wait $monitor_pid 2>/dev/null || true
+    kill "$monitor_pid" 2>/dev/null || true
+    wait "$monitor_pid" 2>/dev/null || true
     unset monitor_pid
   fi
 }
@@ -56,7 +56,8 @@ start_install_log() {
   sudo touch "$OMUNTU_INSTALL_LOG_FILE"
   sudo chmod 666 "$OMUNTU_INSTALL_LOG_FILE"
 
-  export OMUNTU_START_TIME=$(date '+%Y-%m-%d %H:%M:%S')
+  OMUNTU_START_TIME=$(date '+%Y-%m-%d %H:%M:%S')
+  export OMUNTU_START_TIME
 
   echo "=== Omuntu Installation Started: $OMUNTU_START_TIME ===" >>"$OMUNTU_INSTALL_LOG_FILE"
   start_log_output
@@ -68,23 +69,25 @@ stop_install_log() {
 
   if [[ -n ${OMUNTU_INSTALL_LOG_FILE:-} ]]; then
     OMUNTU_END_TIME=$(date '+%Y-%m-%d %H:%M:%S')
-    echo "=== Omuntu Installation Completed: $OMUNTU_END_TIME ===" >>"$OMUNTU_INSTALL_LOG_FILE"
-    echo "" >>"$OMUNTU_INSTALL_LOG_FILE"
-    echo "=== Installation Time Summary ===" >>"$OMUNTU_INSTALL_LOG_FILE"
+    {
+      echo "=== Omuntu Installation Completed: $OMUNTU_END_TIME ==="
+      echo ""
+      echo "=== Installation Time Summary ==="
 
-    if [[ -n $OMUNTU_START_TIME ]]; then
-      OMUNTU_START_EPOCH=$(date -d "$OMUNTU_START_TIME" +%s)
-      OMUNTU_END_EPOCH=$(date -d "$OMUNTU_END_TIME" +%s)
-      OMUNTU_DURATION=$((OMUNTU_END_EPOCH - OMUNTU_START_EPOCH))
+      if [[ -n $OMUNTU_START_TIME ]]; then
+        OMUNTU_START_EPOCH=$(date -d "$OMUNTU_START_TIME" +%s)
+        OMUNTU_END_EPOCH=$(date -d "$OMUNTU_END_TIME" +%s)
+        OMUNTU_DURATION=$((OMUNTU_END_EPOCH - OMUNTU_START_EPOCH))
 
-      OMUNTU_MINS=$((OMUNTU_DURATION / 60))
-      OMUNTU_SECS=$((OMUNTU_DURATION % 60))
+        OMUNTU_MINS=$((OMUNTU_DURATION / 60))
+        OMUNTU_SECS=$((OMUNTU_DURATION % 60))
 
-      echo "Total:      ${OMUNTU_MINS}m ${OMUNTU_SECS}s" >>"$OMUNTU_INSTALL_LOG_FILE"
-    fi
-    echo "=================================" >>"$OMUNTU_INSTALL_LOG_FILE"
+        echo "Total:      ${OMUNTU_MINS}m ${OMUNTU_SECS}s"
+      fi
+      echo "================================="
 
-    echo "Rebooting system..." >>"$OMUNTU_INSTALL_LOG_FILE"
+      echo "Rebooting system..."
+    } >>"$OMUNTU_INSTALL_LOG_FILE"
   fi
 }
 

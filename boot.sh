@@ -29,9 +29,11 @@ rm -rf ~/.local/share/omuntu/
 git clone "https://github.com/${OMUNTU_REPO}.git" ~/.local/share/omuntu >/dev/null
 
 echo -e "\e[32mUsing branch: $OMUNTU_REF\e[0m"
-cd ~/.local/share/omuntu
-git fetch origin "${OMUNTU_REF}" && git checkout "${OMUNTU_REF}"
-cd -
+(
+  cd ~/.local/share/omuntu || exit 1
+  git fetch origin "${OMUNTU_REF}" && git checkout "${OMUNTU_REF}"
+)
 
 echo -e "\nInstallation starting..."
+# shellcheck source=install.sh
 source ~/.local/share/omuntu/install.sh

@@ -8,13 +8,14 @@ DESKTOP_DIR="$HOME/.local/share/applications/"
 if (( $# == 0 )); then
   # Find all TUIs
   while IFS= read -r -d '' file; do
+    # shellcheck disable=SC2016  # Intentional: matching literal $TERMINAL in .desktop file Exec= lines
     if grep -qE '^Exec=.*(\$TERMINAL|xdg-terminal-exec).*-e' "$file"; then
       TUIS+=("$(basename "${file%.desktop}")")
     fi
   done < <(find "$DESKTOP_DIR" -name '*.desktop' -print0)
 
   if ((${#TUIS[@]})); then
-    IFS=$'\n' SORTED_TUIS=($(sort <<<"${TUIS[*]}"))
+    IFS=$'\n' read -r -d '' -a SORTED_TUIS < <(sort <<<"${TUIS[*]}" && printf '\0') || true
     unset IFS
     APP_NAMES_STRING=$(gum choose --no-limit --header "Select TUI to remove..." --selected-prefix="✗ " "${SORTED_TUIS[@]}")
     # Convert newline-separated string to array

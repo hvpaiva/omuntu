@@ -14,7 +14,7 @@ if (( $# == 0 )); then
   done < <(find "$DESKTOP_DIR" -name '*.desktop' -print0)
 
   if ((${#WEB_APPS[@]})); then
-    IFS=$'\n' SORTED_WEB_APPS=($(sort <<<"${WEB_APPS[*]}"))
+    IFS=$'\n' read -r -d '' -a SORTED_WEB_APPS < <(sort <<<"${WEB_APPS[*]}" && printf '\0') || true
     unset IFS
     APP_NAMES_STRING=$(gum choose --no-limit --header "Select web app to remove..." --selected-prefix="✗ " "${SORTED_WEB_APPS[@]}")
     # Convert newline-separated string to array

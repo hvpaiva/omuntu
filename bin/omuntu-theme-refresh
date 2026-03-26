@@ -5,5 +5,5 @@
 THEME_NAME_PATH="$HOME/.config/omuntu/current/theme.name"
 
 if [[ -f $THEME_NAME_PATH ]]; then
-  omuntu-theme-set "$(cat $THEME_NAME_PATH)"
+  omuntu-theme-set "$(cat "$THEME_NAME_PATH")"
 fi

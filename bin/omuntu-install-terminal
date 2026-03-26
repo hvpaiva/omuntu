@@ -21,11 +21,11 @@ kitty) desktop_id="kitty.desktop" ;;
 esac
 
 # Install package
-if omuntu-pkg-add $package; then
+if omuntu-pkg-add "$package"; then
   # Copy custom desktop entry for alacritty with X-TerminalArg* keys
   if [[ $package == "alacritty" ]]; then
     mkdir -p ~/.local/share/applications
-    cp $OMUNTU_PATH/applications/Alacritty.desktop ~/.local/share/applications/
+    cp "$OMUNTU_PATH/applications/Alacritty.desktop" ~/.local/share/applications/
   fi
 
   # Update xdg-terminals.list to prioritize the proper terminal

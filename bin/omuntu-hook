@@ -9,6 +9,7 @@ if (( $# < 1 )); then
   exit 1
 fi
 
+# shellcheck disable=SC2034  # HOOK is available for use by the hook script executed below
 HOOK=$1
 HOOK_PATH="$HOME/.config/omuntu/hooks/$1"
 shift

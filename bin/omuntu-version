@@ -1,2 +1,2 @@
 #!/bin/bash
-cat $OMUNTU_PATH/version
+cat "$OMUNTU_PATH/version"

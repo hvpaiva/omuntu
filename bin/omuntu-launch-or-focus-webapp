@@ -10,6 +10,6 @@ fi
 
 WINDOW_PATTERN="$1"
 shift
-LAUNCH_COMMAND="omuntu-launch-webapp $@"
+LAUNCH_COMMAND="omuntu-launch-webapp $*"
 
 exec omuntu-launch-or-focus "$WINDOW_PATTERN" "$LAUNCH_COMMAND"

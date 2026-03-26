@@ -13,8 +13,8 @@ cp ~/.local/share/omuntu/applications/*.desktop ~/.local/share/applications/
 cp ~/.local/share/omuntu/applications/hidden/*.desktop ~/.local/share/applications/
 
 # Refresh the webapps and TUIs
-bash $OMUNTU_PATH/install/packaging/icons.sh
-bash $OMUNTU_PATH/install/packaging/webapps.sh
-bash $OMUNTU_PATH/install/packaging/tuis.sh
+bash "$OMUNTU_PATH/install/packaging/icons.sh"
+bash "$OMUNTU_PATH/install/packaging/webapps.sh"
+bash "$OMUNTU_PATH/install/packaging/tuis.sh"
 
 update-desktop-database ~/.local/share/applications

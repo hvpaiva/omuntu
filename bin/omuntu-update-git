@@ -6,5 +6,5 @@ echo -e "\e[32mUpdate Omuntu\e[0m"
 
 omuntu-update-time
 
-git -C $OMUNTU_PATH pull --autostash
-git -C $OMUNTU_PATH --no-pager diff --check || git -C $OMUNTU_PATH reset --merge
+git -C "$OMUNTU_PATH" pull --autostash
+git -C "$OMUNTU_PATH" --no-pager diff --check || git -C "$OMUNTU_PATH" reset --merge

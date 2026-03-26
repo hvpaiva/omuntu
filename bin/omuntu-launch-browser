@@ -4,6 +4,7 @@
 # Automatically converts --private into the correct flag for the given browser.
 
 default_browser=$(xdg-settings get default-web-browser 2>/dev/null)
+# shellcheck disable=SC2086  # Intentional word splitting: $default_browser is a single .desktop filename, brace expansion requires unquoted
 browser_exec=$(sed -n 's/^Exec=\([^ ]*\).*/\1/p' {~/.local,~/.nix-profile,/usr}/share/applications/$default_browser 2>/dev/null | head -1)
 
 if [[ -z $browser_exec ]]; then

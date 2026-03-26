@@ -3,5 +3,5 @@
 ASUSCTL_THEME=~/.config/omuntu/current/theme/keyboard.rgb
 
 if omuntu-cmd-present asusctl; then
-  asusctl aura effect static -c $(sed 's/^#//' $ASUSCTL_THEME)
+  asusctl aura effect static -c "$(sed 's/^#//' "$ASUSCTL_THEME")"
 fi

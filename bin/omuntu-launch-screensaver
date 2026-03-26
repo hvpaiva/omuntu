@@ -22,7 +22,7 @@ focused=$(hyprctl monitors -j | jq -r '.[] | select(.focused == true).name')
 terminal=$(xdg-terminal-exec --print-id)
 
 for m in $(hyprctl monitors -j | jq -r '.[] | .name'); do
-  hyprctl dispatch focusmonitor $m
+  hyprctl dispatch focusmonitor "$m"
 
   case $terminal in
   *Alacritty*)
@@ -51,4 +51,4 @@ for m in $(hyprctl monitors -j | jq -r '.[] | .name'); do
   esac
 done
 
-hyprctl dispatch focusmonitor $focused
+hyprctl dispatch focusmonitor "$focused"

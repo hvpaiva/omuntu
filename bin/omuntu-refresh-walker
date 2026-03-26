@@ -4,11 +4,11 @@
 
 # Ensure walker is set to autostart
 mkdir -p ~/.config/autostart/
-cp $OMUNTU_PATH/default/walker/walker.desktop ~/.config/autostart/
+cp "$OMUNTU_PATH/default/walker/walker.desktop" ~/.config/autostart/
 
 # And restarts if it crashes or is killed
 mkdir -p ~/.config/systemd/user/app-walker@autostart.service.d/
-cp $OMUNTU_PATH/default/walker/restart.conf ~/.config/systemd/user/app-walker@autostart.service.d/restart.conf
+cp "$OMUNTU_PATH/default/walker/restart.conf" ~/.config/systemd/user/app-walker@autostart.service.d/restart.conf
 
 systemctl --user daemon-reload
 

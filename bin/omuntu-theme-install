@@ -30,4 +30,4 @@ if ! git clone "$REPO_URL" "$THEME_PATH"; then
 fi
 
 # Apply the new theme with omuntu-theme-set
-omuntu-theme-set $THEME_NAME
+omuntu-theme-set "$THEME_NAME"

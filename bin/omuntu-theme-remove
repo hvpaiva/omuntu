@@ -17,6 +17,7 @@ else
 fi
 
 THEMES_DIR="$HOME/.config/omuntu/themes"
+# shellcheck disable=SC2034  # CURRENT_DIR intentionally defined for potential use in user hook/extension scripts
 CURRENT_DIR="$HOME/.config/omuntu/current"
 THEME_PATH="$THEMES_DIR/$THEME_NAME"
 

@@ -4,5 +4,5 @@ set -e
 # Reinstall the Omuntu configuration directory from the git source.
 
 git clone "https://github.com/hvpaiva/omuntu.git" ~/.local/share/omuntu-new >/dev/null
-mv $OMUNTU_PATH ~/.local/share/omuntu-old
-mv ~/.local/share/omuntu-new $OMUNTU_PATH
+mv "$OMUNTU_PATH" ~/.local/share/omuntu-old
+mv ~/.local/share/omuntu-new "$OMUNTU_PATH"

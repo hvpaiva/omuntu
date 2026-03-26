@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [dev]
+  pull_request:
+    branches: [dev]
+
+jobs:
+  shellcheck:
+    name: ShellCheck
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run ShellCheck on all scripts
+        run: |
+          echo "ShellCheck version: $(shellcheck --version | head -2 | tail -1)"
+          echo "Checking scripts..."
+          shellcheck --severity=style \
+            bin/omuntu-* \
+            $(find install/ -name '*.sh' -type f) \
+            boot.sh install.sh \
+            default/bash/rc default/bash/envs default/bash/aliases \
+            default/bash/shell default/bash/init default/bash/functions \
+            default/bashrc default/bash/fns/* \
+            default/waybar/indicators/*.sh \
+            default/systemd/system-sleep/unmount-fuse \
+            config/omuntu/extensions/menu.sh
+          echo "All scripts passed ShellCheck."

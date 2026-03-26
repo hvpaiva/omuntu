@@ -6,6 +6,7 @@ HISTFILESIZE="${HISTSIZE}"
 
 # Autocompletion
 if [[ ! -v BASH_COMPLETION_VERSINFO && -f /usr/share/bash-completion/bash_completion ]]; then
+  # shellcheck source=/dev/null  # System file, not available during static analysis
   source /usr/share/bash-completion/bash_completion
 fi
 

@@ -1,6 +1,11 @@
+# shellcheck source=default/bash/envs
 source ~/.local/share/omuntu/default/bash/envs
+# shellcheck source=default/bash/shell
 source ~/.local/share/omuntu/default/bash/shell
+# shellcheck source=default/bash/aliases
 source ~/.local/share/omuntu/default/bash/aliases
+# shellcheck source=default/bash/functions
 source ~/.local/share/omuntu/default/bash/functions
+# shellcheck source=default/bash/init
 source ~/.local/share/omuntu/default/bash/init
 [[ $- == *i* ]] && bind -f ~/.local/share/omuntu/default/bash/inputrc

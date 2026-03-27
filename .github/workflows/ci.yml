@@ -97,3 +97,59 @@ jobs:
             exit 1
           fi
           echo "All Flatpak packages validated successfully."
+
+  validate-cargo:
+    name: Validate Cargo Packages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate crate names
+        run: |
+          failures=()
+          while IFS= read -r crate; do
+            status=$(curl -s -o /dev/null -w "%{http_code}" \
+              -H "User-Agent: omuntu-ci-validator (https://github.com/hvpaiva/omuntu)" \
+              "https://crates.io/api/v1/crates/${crate}")
+            if [[ $status != "200" ]]; then
+              echo "::error file=install/packages/cargo.packages::Crate not found on crates.io: ${crate} (HTTP ${status})"
+              failures+=("$crate")
+            fi
+            sleep 1  # crates.io rate limit: 1 request/second
+          done < <(grep -v '^\s*#' install/packages/cargo.packages | grep -v '^\s*$')
+
+          if (( ${#failures[@]} > 0 )); then
+            echo ""
+            echo "=== VALIDATION FAILED ==="
+            echo "The following crate names were not found on crates.io:"
+            printf '  - %s\n' "${failures[@]}"
+            exit 1
+          fi
+          echo "All cargo packages validated successfully."
+
+  validate-pip:
+    name: Validate Pip Packages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate PyPI package names
+        run: |
+          failures=()
+          while IFS= read -r pkg; do
+            if ! pip index versions "$pkg" > /dev/null 2>&1; then
+              echo "::error file=install/packages/pip.packages::Package not found on PyPI: ${pkg}"
+              failures+=("$pkg")
+            fi
+          done < <(grep -v '^\s*#' install/packages/pip.packages | grep -v '^\s*$')
+
+          if (( ${#failures[@]} > 0 )); then
+            echo ""
+            echo "=== VALIDATION FAILED ==="
+            echo "The following packages were not found on PyPI:"
+            printf '  - %s\n' "${failures[@]}"
+            exit 1
+          fi
+          echo "All pip packages validated successfully."

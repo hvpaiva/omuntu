@@ -28,3 +28,72 @@ jobs:
             default/systemd/system-sleep/unmount-fuse \
             config/omuntu/extensions/menu.sh
           echo "All scripts passed ShellCheck."
+
+  validate-apt:
+    name: Validate APT Packages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up PPAs and third-party repos
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y software-properties-common
+          sudo add-apt-repository -y ppa:cppiber/hyprland
+          sudo add-apt-repository -y ppa:mkasberg/ghostty-ubuntu
+          sudo add-apt-repository -y ppa:zhangsongcui3371/fastfetch
+          sudo add-apt-repository -y ppa:dotnet/backports
+          sudo mkdir -p /etc/apt/keyrings
+          curl -fsSL https://repo.charm.sh/apt/gpg.key | sudo gpg --batch --yes --dearmor -o /etc/apt/keyrings/charm.gpg
+          echo "deb [signed-by=/etc/apt/keyrings/charm.gpg] https://repo.charm.sh/apt/ * *" | sudo tee /etc/apt/sources.list.d/charm.list
+          sudo apt-get update
+
+      - name: Validate package names
+        run: |
+          failures=()
+          for file in install/packages/apt.packages install/packages/ppa.packages; do
+            while IFS= read -r pkg; do
+              if ! apt-cache show "$pkg" > /dev/null 2>&1; then
+                echo "::error file=${file}::Package not found in configured repos: ${pkg}"
+                failures+=("${file}:${pkg}")
+              fi
+            done < <(grep -v '^\s*#' "$file" | grep -v '^\s*$' | sed 's/\s*#.*//')
+          done
+
+          if (( ${#failures[@]} > 0 )); then
+            echo ""
+            echo "=== VALIDATION FAILED ==="
+            echo "The following packages were not found:"
+            printf '  - %s\n' "${failures[@]}"
+            exit 1
+          fi
+          echo "All APT packages validated successfully."
+
+  validate-flatpak:
+    name: Validate Flatpak Packages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate Flatpak app IDs
+        run: |
+          failures=()
+          while IFS= read -r app_id; do
+            status=$(curl -s -o /dev/null -w "%{http_code}" \
+              "https://flathub.org/api/v2/appstream/${app_id}")
+            if [[ $status != "200" ]]; then
+              echo "::error file=install/packages/flatpak.packages::Flatpak app not found on Flathub: ${app_id} (HTTP ${status})"
+              failures+=("$app_id")
+            fi
+          done < <(grep -v '^\s*#' install/packages/flatpak.packages | grep -v '^\s*$')
+
+          if (( ${#failures[@]} > 0 )); then
+            echo ""
+            echo "=== VALIDATION FAILED ==="
+            echo "The following Flatpak app IDs were not found on Flathub:"
+            printf '  - %s\n' "${failures[@]}"
+            exit 1
+          fi
+          echo "All Flatpak packages validated successfully."

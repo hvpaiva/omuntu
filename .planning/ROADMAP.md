@@ -49,10 +49,10 @@ Plans:
   2. Adding a nonexistent Flatpak app ID to flatpak.packages causes CI to fail
   3. Adding a nonexistent crate name to cargo.packages causes CI to fail
   4. Adding a nonexistent PyPI package to pip.packages causes CI to fail
-**Plans**: TBD
+**Plans**: 1 plan
 
 Plans:
-- [ ] 02-01: TBD
+- [x] 02-01-PLAN.md — Add four package validation CI jobs (apt, Flatpak, cargo, pip) to ci.yml
 
 ### Phase 3: Config & Template Validators
 **Goal**: Broken config references, incomplete themes, and malformed desktop entries are caught in CI

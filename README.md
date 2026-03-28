@@ -1,5 +1,7 @@
 # Omuntu
 
+> **WARNING: Do not install Omuntu at this time.** The installer has known critical issues and is not mature enough for use. Running the installation now may leave your system in an inconsistent state. This project is under active development — no support will be provided for broken installs.
+
 Omuntu is a fork of [Omarchy](https://github.com/basecamp/omarchy) adapted for **Ubuntu 24.04 LTS**.
 
 It transforms an existing Ubuntu 24.04 installation into the Omarchy desktop experience (Hyprland + themes + tooling) via a desktop configurator/installer — not an ISO.
